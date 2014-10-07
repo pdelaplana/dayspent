@@ -1,0 +1,481 @@
+/*
+.ui-autocomplete {
+    background-color: #fff;
+    position: absolute;
+    cursor: default;
+    list-style: none;
+    margin: 25px 0 0;
+    padding: 0;
+    border: 1px solid #E5E5E5;
+    border-top: none;
+    -moz-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+    
+    -moz-border-radius: 0;
+    border-radius: 0;
+    
+    -moz-box-shadow: 0 3px 5px #888;
+    -webkit-box-shadow: 0 3px 5px #888;
+    box-shadow: 0 3px 5px #888;
+    font-size: 12px;
+}
+
+.ui-autocomplete .ui-menu-item {
+    padding: 0;
+    margin: 0;
+}
+
+.ui-autocomplete  .ui-menu-item a {
+    display: block;
+    float:left;
+    padding: 4px 6px;
+    margin: 0;
+    text-decoration: none;
+    line-height: 12px;
+    border-bottom: 0px solid #E5E5E5;
+    border-top: 0px solid #fff;
+    color: #78959D;
+
+}
+
+.ui-autocomplete .ui-menu-item a.ui-state-hover,
+.ui-autocomplete .ui-menu-item a.ui-state-active {
+    background-color: #c0d1e2;
+    color: #555;
+    border-color: #a6cef7;
+}
+
+
+
+.ui-autocomplete-loading {
+    background: white url(ui-anim_basic_16x16.gif) right center no-repeat;
+}
+*/
+
+
+.tagit ul.ui-autocomplete 
+{
+    background-color: #fff;
+    position: absolute!important;
+    cursor: default;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    border: 1px solid #E5E5E5;
+    border-top: none;
+    -moz-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+    
+    -moz-border-radius: 0;
+    border-radius: 0;
+    
+    -moz-box-shadow: 0 3px 5px #888;
+    -webkit-box-shadow: 0 3px 5px #888;
+    box-shadow: 0 3px 5px #888;
+    
+    width:350px!important;
+    
+}
+
+.tagit ul.ui-autocomplete li {
+    display: inline-block !important;
+    float:left;
+    list-style-type: none !important;
+    padding-right: 20px !important;
+    width:auto!important;
+    clear:none!important;
+    
+    padding-right: 10px !important;
+    width:100%!important;
+    clear:none!important;
+}
+
+.tagit ul.ui-autocomplete li a
+{
+    color:black;
+    background-color:transparent!important;
+}
+
+.tagit ul.ui-autocomplete li a:hover
+{
+
+}
+
+.tagit .ui-autocomplete li.ui-menu-item:hover
+{
+    background-color:black;
+}
+
+.tagit .ui-autocomplete .ui-menu-item a.ui-state-hover,
+.tagit .ui-autocomplete .ui-menu-item a.ui-state-active,
+.tagit .ui-autocomplete .ui-menu-item a.ui-state-focus
+ {
+    text-decoration:underline;
+    font-weight:normal!important;
+    color:white;
+    background-color:black!important;
+}
+
+ul.tagit {
+    cursor: text;
+    overflow: auto;
+    font-size: 14px;
+    padding: 3px;
+    padding-top:0px;
+    margin-left:0px;
+    margin-top: 0px;
+    margin-right: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #bababa;
+    background: #fff;
+    color: #333;
+    
+    width: 100%;
+    height:35px!important;
+
+    /* Added to support tagit containers in a sidebar*/
+    display:block;
+    background-color:rgb(255,255,255);
+}
+
+ul.tagit li {
+    display: inline-block;
+    float: left;
+    margin: 2px 5px 2px 0;
+    position: relative;
+}
+
+ul.tagit.ui-sortable li.tagit-choice a.ui-icon.ui-icon-grip-dotted-vertical{
+    float: left;
+    width: 12px;
+    margin-left: -5px;
+    cursor: move;
+}
+
+
+ul.tagit li.tagit-choice {
+    background: #999999;
+    color:#fff;
+    border: 1px solid #999999;
+    
+    /*
+    background: #FFF5BB;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.32,#FFF5BB),color-stop(0.66,#FDF2B1),color-stop(0.83, #FCEE9B));
+    background-image: -moz-linear-gradient(top,#FFF5BB,#FCEE9B);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5bb', endColorstr='#fcee9b');
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border: 1px solid #F2E598;
+    */
+    
+    padding: 2px 15px 3px 4px;
+    cursor: default;
+
+}
+
+
+ul.tagit li.tagit-choice.selected {
+    /*
+    background: #ff3019; /* old browsers */
+    /*
+    background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* firefox */
+    /*
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff3019), color-stop(100%, #cf0404)); /* webkit */
+    /*
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ff3019', endColorstr = '#cf0404', GradientType = 0); /* ie */
+    /*
+    border-color: #f76464;
+    */
+    background: #999999;
+    border-color: #999999;
+}
+
+ul.tagit li.tagit-choice:hover {
+    /*
+    background: #FFF5BB;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.32,#FFF57E),color-stop(0.66,#FDF2B1),color-stop(0.83, #FCEE9B));
+    background-image: -moz-linear-gradient(top,#FFF57E,#FCEE9B);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF57E', endColorstr='#fcee9b');
+    */
+    background: #999999;
+    border-color: #999999;
+}
+
+
+ul.tagit li.tagit-new {
+    padding: 2px 4px 3px;
+    padding: 2px 4px 1px;
+    padding: 2px 4px 1px 0;
+}
+
+
+ul.tagit li.tagit-choice input {
+    display: block;
+    float: left;
+    margin: 0 5px 0 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    
+}
+
+
+ul.tagit li.tagit-choice a.tagit-close {
+    color: #111!important;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    outline: medium none;
+    padding: 3px 0 2px 3px!important;
+    text-decoration: none!important;
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 3px;
+    text-shadow: -1px -1px 0 rgba(150, 150, 0, 0.7);
+    border-bottom:none!important;
+    
+}
+
+ul.tagit li.tagit-choice a.tagit-close:hover {
+    color: #f00 !important;
+    background:none!important;
+}
+
+ul.tagit input[type="text"] {
+    -moz-box-sizing: border-box;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: inherit !important;
+    outline: none;
+}
+
+
+ul.tagit input[type="text"]:disabled {
+    background-color:transparent;
+}
+
+.tagit-hiddenSelect {
+    display:none;
+}
+
+ul.tagit li a {
+	text-decoration:none!important;
+}
+
+
+
+
+/*
+ * Tagits in a sidebar
+ *
+ **/
+
+#SidebarCharms .tagit ul.ui-autocomplete 
+{
+    background-color: #fff;
+    position: absolute!important;
+    cursor: default;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    border: 1px solid #E5E5E5;
+    border-top: none;
+    -moz-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+    
+    -moz-border-radius: 0;
+    border-radius: 0;
+    
+    -moz-box-shadow: 0 3px 5px #888;
+    -webkit-box-shadow: 0 3px 5px #888;
+    box-shadow: 0 3px 5px #888;
+    font-size: 12px;   
+
+    min-width:240px!important;
+    width:240px!important;
+
+    
+}
+
+#SidebarCharms .tagit ul.ui-autocomplete li {
+    display: inline-block !important;
+    float:left;
+    list-style-type: none !important;
+    padding-right: 0px !important;
+    width:100%!important;
+    clear:none!important;
+    
+}
+
+
+#SidebarCharms ul.tagit ul.ui-autocomplete li.ui-menu-item a
+{
+    background-color:transparent!important;
+    padding-left: 5px !important;
+}
+
+
+#SidebarCharms .tagit .ui-autocomplete li.ui-menu-item:hover
+{
+    background-color:black;
+}
+
+#SidebarCharms .tagit .ui-autocomplete .ui-menu-item a.ui-state-hover,
+#SidebarCharms .tagit .ui-autocomplete .ui-menu-item a.ui-state-active,
+#SidebarCharms .tagit .ui-autocomplete .ui-menu-item a.ui-state-focus
+ {
+    text-decoration:underline;
+    font-weight:normal!important;    
+    
+    color:white;
+    background-color:black!important;
+}
+
+#SidebarCharms ul.tagit {
+    cursor: text;
+    overflow: auto;
+    font-size: 14px;
+    padding: 3px;
+    margin-left:0px;
+    margin-top: 2px;
+    margin-right: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #bababa;
+    background: #fff;
+    color: #333;
+    
+    /* Added to support tagit containers in a sidebar*/
+    display:block;
+    background-color:rgb(255,255,255);
+
+    position:inherit!important;
+    
+}
+
+#SidebarCharms ul.tagit li {
+    display: inline-block;
+    float: left;
+    margin: 2px 5px 2px 0;
+    position: relative;
+}
+
+#SidebarCharms ul.tagit.ui-sortable li.tagit-choice a.ui-icon.ui-icon-grip-dotted-vertical{
+    float: left;
+    width: 12px;
+    margin-left: -5px;
+    cursor: move;
+}
+
+
+#SidebarCharms ul.tagit li.tagit-choice {
+    background: #999999;
+    color:#fff;
+    border: 1px solid #999999;
+    
+    /*
+    background: #FFF5BB;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.32,#FFF5BB),color-stop(0.66,#FDF2B1),color-stop(0.83, #FCEE9B));
+    background-image: -moz-linear-gradient(top,#FFF5BB,#FCEE9B);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5bb', endColorstr='#fcee9b');
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border: 1px solid #F2E598;
+    */
+    
+    padding: 2px 15px 3px 4px;
+    cursor: default;
+    width:auto;
+}
+
+
+#SidebarCharms ul.tagit li.tagit-choice.selected {
+    /*
+    background: #ff3019; /* old browsers */
+    /*
+    background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* firefox */
+    /*
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff3019), color-stop(100%, #cf0404)); /* webkit */
+    /*
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ff3019', endColorstr = '#cf0404', GradientType = 0); /* ie */
+    /*
+    border-color: #f76464;
+    */
+    background: #999999;
+    border-color: #999999;
+}
+
+#SidebarCharms ul.tagit li.tagit-choice:hover {
+    /*
+    background: #FFF5BB;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.32,#FFF57E),color-stop(0.66,#FDF2B1),color-stop(0.83, #FCEE9B));
+    background-image: -moz-linear-gradient(top,#FFF57E,#FCEE9B);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF57E', endColorstr='#fcee9b');
+    */
+    background: #999999;
+    border-color: #999999;
+}
+
+
+#SidebarCharms ul.tagit li.tagit-new {
+    padding: 2px 4px 3px;
+    padding: 2px 4px 1px;
+    padding: 2px 4px 1px 0;
+}
+
+
+#SidebarCharms ul.tagit li.tagit-choice a.tagit-close {
+    color: #111!important;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    outline: medium none;
+    padding: 3px 0 2px 3px;
+    text-decoration: none!important;
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 3px;
+    text-shadow: -1px -1px 0 rgba(150, 150, 0, 0.7);
+    border-bottom:none!important;
+    width:auto!important;
+    background:none!important;
+}
+
+#SidebarCharms ul.tagit li.tagit-choice a.tagit-close:hover {
+    color: #f00 !important;
+    background:none!important;
+}
+
+#SidebarCharms ul.tagit input[type="text"] {
+    -moz-box-sizing: border-box;
+    border: none !important;
+    border-color:none!important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: inherit !important;
+    outline: none !important;
+    width:inherit!important;
+}
+
+#SidebarCharms ul.tagit li.tagit-new{
+    width:inherit!important;
+}
+
+#SidebarCharms ul.tagit li.tagit-new:hover{
+    background:none!important;
+    border:none!important;
+}
+
+
+#SidebarCharms .tagit-hiddenSelect {
+    display:none;
+}
+
+#SidebarCharms ul.tagit li a {
+	text-decoration:none!important;
+}
+
+
+

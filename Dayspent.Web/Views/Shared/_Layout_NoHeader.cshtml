@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    @RenderSection("Styles", required: false)
+}
+
+@section Scripts{
+    @RenderSection("Scripts", false)
+    
+}
+
+<div id="wrapper">
+    @RenderBody()    
+</div>

@@ -1,0 +1,88 @@
+﻿<div id="ActivityStream" class="grid fluid no-margin-top">
+    <div class="row">
+        <div class="span8">
+            <div class="push-down-20 " data-bind="template: { name:'CreateActivityTemplate', data: newActivity }, visible:true"></div>
+            <div class="push-down-25 border-top">
+                <div class="button-dropdown push-down-15" style="">
+                    <button class="dropdown-toggle bg-transparent" style="font-size:20px" data-bind="text: 'Show '+ periodFilters.selection() "></button>
+                    <ul class="dropdown-menu" data-role="dropdown">
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('today') }">Today</a></li>
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('yesterday') }">Yesterday</a></li>
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('thisweek') }">This Week</a></li>
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('lastweek') }">Last Week</a></li>
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('thismonth') }">This Month</a></li>
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('lastmonth') }">Last Month</a></li>
+                        <li><a href="#" data-bind="click: function(){ periodFilters.set('all') }">All Time</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" data-bind="click: periodFilters.open">Other...</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div data-bind="visible: periodFilters.enabled">
+                <div data-bind="datePeriodSelection: $data.periodFilters, templateId: 'AdvanceDateFiltersTemplate'"></div>
+            </div>
+
+            <div style="text-align:center" data-bind="visible:activities.loading" >
+                <div class="padding20 ">
+                    <p class="text-center">Getting data...</p>
+                    <img src="/content/images/ajax-loader-bar-1.gif" />
+                </div>
+                
+            </div>
+
+            <!-- ko foreach: { data: $data, afterRender: afterStreamRenders } -->
+            <div id="ActivityContainer" class="push-down-25" data-bind="visible: !activities.loading()">
+               
+                <div class="listview" data-bind="foreach: dateGroups">
+                    <div style="margin-bottom:20px" data-bind="visible: activities.getVisibleCount() > 0">
+                        <span class="subheader" data-bind="text: name"></span>
+                        <span class="pull-right-10 bg-dark fg-white padding5" data-bind="text:totalTimeSpentInMins"></span>
+                    </div>
+                    <!-- ko foreach: activities -->
+                    <div class="list ol-transparent bd-transparent" data-bind="visible: visible">
+                        <div class="list-content border-bottom">
+                            <img class="icon" data-bind="attr: { src: '/api/avatar/'+activityByUserId() }" />
+                            <div class="data" data-bind="visible: !editing()">
+                                <span class="list-title" style="margin-bottom:10px">
+                                    <span class="item-title list-title" data-bind="text: activityByUserFullName"></span>
+                                    <span class="list-remark text-muted" data-bind="text: moment(startDate()).format('llll')"></span>
+                                </span>
+                                <span class="list-subtitle" data-bind="markdownToHtml: description"></span>
+                                <div class="" data-bind="visible: tags().length > 0" >
+                                    <ul style="border:0;background-color:transparent;margin-bottom:0;overflow:visible;min-height:1px" data-bind="tagit: tags, tagitOptions: { enabled: false, initialTags: tags(), sourceUrl: '/api/tags' }"></ul>
+                                </div>
+                                <div class="list-remark fg-grayLight push-down-10">
+                                    <a href="" data-bind="click: function(){ editing(true); }">Edit</a>
+                                    &middot;
+                                    <a href="" data-bind="click: remove ">Delete</a>
+                                </div>
+                                <div class="item-title-secondary place-top-right padding10" data-bind="text: timeSpentMinsFormatted"></div>
+                            </div>
+                            <div class="data" data-bind="editActivityTemplate: $data, templateId: 'EditActivityTemplate'">
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <!--ko if:  activities().length == 0 && !activities.loading() -->
+            <div class="text-center">
+                <span class="bg-red fg-white padding20">
+                    No entries found for selected period
+                </span>
+            </div>
+            <!--/ko-->
+
+        </div>
+        <div class="span4 padding10">
+            <div class="border bd-cobalt padding10 bg-darkCobalt push-down-10">
+                <h2 class="text-center fg-white">Total Time</h2>
+                <h3 class="text-center fg-white" data-bind="text: totalTimeSpent">Total Time Spent</h3>
+            </div>
+        </div>
+    </div>
+</div>

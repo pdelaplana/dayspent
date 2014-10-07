@@ -1,0 +1,35 @@
+﻿@model object
+@using System.Dynamic
+@{
+    var id = (string)ViewData["id"];
+    id = !String.IsNullOrEmpty(id) ? "id=" + id : "";
+
+    var style = (string)ViewData["style"];
+    style = !String.IsNullOrEmpty(style) ? "style=" + style : "";
+
+    var databind = (string)ViewData["databind"];
+
+    var htmlAttributes = new Dictionary<string,object>();
+    if (!String.IsNullOrEmpty(databind))
+    {
+        htmlAttributes.Add("data-bind", databind);
+    }
+
+    
+    
+    var label = (string)ViewData["label"];
+    if (!String.IsNullOrEmpty(label)) {
+        ViewData.ModelMetadata.DisplayName = label;
+    }
+
+}
+
+<div style="margin-bottom:5px">
+    @Html.LabelFor(m => m)
+    @Html.ValidationMessageFor(m => m)
+</div>
+  
+<div @id class="input-control text" @style >    
+    @Html.TextBoxFor(m => m,  htmlAttributes)
+    
+</div>

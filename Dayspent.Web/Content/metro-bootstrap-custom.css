@@ -1,0 +1,704 @@
+/*
+ * CSS Customizatons for Metro Bootstrap
+ *
+ * Metro Bootstrap is copyright 2012-2013 of Sergey Pimenov
+ * 
+ */
+
+/*************************************
+ *    Visual Classes 
+ ************************************/
+.lighten
+{
+    color:#aaa !important; 
+}
+.lighten:hover
+{
+    color:#000000 !important
+}
+
+/*
+ * Addresses font-family inconsistency between 'textarea' and other form elements.
+ */
+textarea {
+  font-family: sans-serif;
+  resize:none;
+}
+
+/*********************************** 
+ * Containers and Layouts
+ ********************************* */
+
+/* 
+ * Remove top and bottom margins
+ */
+.no-margin-top {
+    margin-top:0;
+}
+.no-margin-bottom{
+    margin-bottom:0;
+}
+
+
+/*********************************** 
+ * Navigation Bar
+ ********************************* */
+.metro .navigation-bar .navigation-bar-content .element
+{
+    font-size:15px;
+}
+
+
+/*********************************** 
+ * Tiles 
+ ********************************* */
+
+.metro .tile-area {
+    padding-top:0px;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.metro .tile-area .tile-group {
+    padding-top:20px;
+}
+
+
+/* Add 20 px padding for elements  */
+.metro .tiles
+{
+    padding:0 20px;
+}
+
+
+.metro .tiles .tile-group
+{
+    padding-top:0px;
+    /*margin-right:50px;*/
+}
+
+/*********************************** 
+ * Tile Sizes
+ ********************************* */
+
+.metro .tile.quarter{
+  width: 25px;
+  height: 25px;
+}
+
+.metro .tile.quarter.selected {
+  border: 3px #4390df solid;
+}
+.metro .tile.quarter.selected:after {
+  position: absolute;
+  display: block;
+  border-top: 13px solid #4390df;
+  border-left: 13px solid transparent;
+  right: 0;
+  content: "";
+  top: 0;
+  z-index: 101;
+}
+.metro .tile.quarter.selected:before {
+  position: absolute;
+  display: block;
+  content: "\e08a";
+  color: #fff;
+  right: 0;
+  font-family: iconFont;
+  font-size: 4pt;
+  font-weight: normal;
+  z-index: 102;
+  top: 0;
+}
+
+
+
+/*********************************** 
+ * Menus
+ ********************************* */
+nav.horizontal-menu.header-menu ul li a.back-button i
+{
+    font-size:32px;
+}
+nav.horizontal-menu.header-menu ul li a.heading
+{
+    font-size:220%;
+    color: #e51400;
+}
+
+nav.horizontal-menu.header-menu ul li:first-child
+{
+    margin-right:0px;
+}
+
+nav.horizontal-menu.header-menu ul li:first-child + li
+{
+    margin-left:0px;
+}
+
+nav.horizontal-menu a.big {
+    font-size:180%;
+}
+
+.horizontal-menu ul
+{
+    margin-right:0px;
+    padding-left:0px;   
+}
+
+/* menus for section headers */
+.metro nav.horizontal-menu.section-header li > a {
+    color: rgba(0, 0, 0, 0.6); 
+    font-size: 16pt; 
+    font-style: normal; 
+    font-weight: 300; 
+    letter-spacing: 0.01em; 
+    line-height: 24pt; 
+    margin: 10px 0; 
+    padding: 0;
+}
+.metro nav.horizontal-menu.section-header li > a.dropdown-toggle:after {
+    color: rgba(0, 0, 0, 0.6); 
+    font-family: iconFont;
+    font-weight: 300; 
+    font-style:normal;
+    font-size: .5em;
+    content: "\e1b3";
+    left: 93%;
+    top: .5em;
+}
+
+/*********************************** 
+ * Tables
+ ********************************* */
+.metro table thead tr th
+{
+    text-align:left;
+    color:rgba(0,0,0,0.3);
+    font-weight:400;
+}
+
+.metro table thead tr td
+{
+    font-size:88%;
+}
+
+/*********************************** 
+ * Grids 
+ **********************************/
+.metro .grid .row
+{
+    margin-top:0px;
+}
+
+
+/************************************ 
+ *   Validation field
+ ************************************/
+span.field-validation-error
+{
+    color: #e51400 !important;
+    font-size:smaller;
+}
+
+input.input-validation-error{
+    border-color: #e51400!important;
+    
+}
+
+.validation-summary-errors {
+    padding:10px;
+    background-color: #e51400 !important;
+    height:auto;
+    
+}
+.validation-summary-errors ul {
+    list-style:none;
+}
+.validation-summary-errors ul li {
+    color: #ffffff !important;
+}
+
+
+
+/************************************ 
+ *   Date Badge
+ ************************************/
+.entryDate { 
+    border: 1px solid #999; 
+    /*font-family: 'Segoe UI', ,"Times New Roman", serif;*/ 
+    left: 4.8em;
+    left:0px; 
+    line-height: 1; 
+    /*position: absolute;*/ 
+    top: 0; 
+    width: 3.5em;
+    
+    display: block;
+    width: 56px;
+    height: 56px;
+    float: left;
+    margin-right: 10px;
+}
+.entryDate span { 
+    display: block; 
+    text-align: center; 
+}
+.postMonth { 
+    text-transform: uppercase; 
+    font-size: .6em;
+    padding-top: 0.3em; 
+}
+.postDay { font-size: 2em; }
+.postYear { 
+    background-color: #2358B8; 
+    color: #FFF; 
+    font-size: .6em; 
+    padding: 0.3em 0; 
+    margin-top: 0.4em;
+}
+
+
+/************************************ 
+ *   Message Dialog
+ ************************************/
+.metro .message-dialog {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: auto;
+  min-height: 100px;
+  top: 20%;
+  padding: 10px 10px 0;
+}
+
+.message-dialog .message-dialog-inner
+{
+    padding:20px;
+    min-height:200px;
+    width:900px;
+    margin-left:auto;
+    margin-right:auto
+}
+
+/* Fix line-height for labels in message-dialogs */
+.message-dialog-inner label {
+    line-height:21px!important;
+}
+
+/************************************ 
+ *   Metro Dialog
+ ************************************/
+.metro .window-overlay {
+    height:auto;
+    overflow-y:auto;
+    
+}
+.metro .window {
+    height:auto;
+    padding-top:0;
+    margin-top:0px;
+    margin-bottom:50px;
+}
+
+.metro .window .content {
+    height:90%;
+    padding-bottom:0px;
+}
+
+.metro .window .caption .btn-cog {
+  color: #ffffff;
+  position: absolute;
+  top: -8px;
+  right: 0;
+  width: 48px;
+  height: 24px;
+  min-height: 24px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Cambria_', 'PT Serif Caption', Verdana, Arial, Helvetica, sans-serif;
+  font-family: iconFont;
+  font-size: 6pt;
+  font-weight: normal;
+  padding: 0 0 10px 0;
+  z-index: 3;
+  outline: none;
+}
+.metro .window .caption .btn-cog:hover {
+  /*background-color: #e04343;*/
+}
+.metro .window .caption .btn-cog:active {
+  background-color: #b01919 !important;
+  top: -8px;
+  right: 10px;
+  left: auto;
+}
+.metro .window .caption .btn-cog:before {
+  content: "\e04a";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -0.3em;
+}
+
+
+
+/************************************ 
+ *   Listview fluid
+ ************************************/
+.metro div.listview.fluid a.list {
+    display:inline-block;
+    margin:4px 10px 4px 0;
+    border-width:4px;
+
+}
+.metro div.listview.fluid a.list.selected {
+    border-width:4px;   
+    
+}
+
+/************************************ 
+ *  Autocomplete
+ *  Fix margin-left for items in 
+ *  dropdown items
+ ************************************/
+ul.ui-autocomplete{
+    margin-left:10px!important;
+    padding-left:0px!important;
+}
+
+
+/************************************ 
+ *  Text styles
+ ************************************/
+.text-large{
+    font-size:1.3em;
+}
+
+/************************************ 
+ *  input-control text btn save
+ ************************************/
+.metro .input-control.text .btn-save {
+  /*background-color: #F0F0F0;*/
+  background-color: #fff;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  border: 0;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  min-height: 1px;
+  min-width: 1px;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+.metro .input-control.text .btn-save:after {
+  font-family: iconFont;
+  font-size: 12pt;
+}
+.metro .input-control.text .btn-save:not(:disabled):active {
+  background-color: #1d1d1d;
+  color: #ffffff;
+}
+.metro .input-control.text .btn-save:active {
+  left: auto;
+}
+.metro .input-control.text .btn-save:focus {
+  outline: 1px #ccc dotted ;
+}
+.metro .input-control.text input:focus ~ .btn-save{
+  display: block;
+}
+.metro .input-control.text input:not(:focus) ~ .btn-save:active {
+  display: block;
+}
+.metro .input-control.text .btn-save:after {
+  content: "\e170";
+}
+.metro .input-control.text .btn-save {
+  display: block;
+}
+.metro .input-control.text input:disabled ~ .btn-save {
+  display: none;
+}
+
+/************************************ 
+ *  input-control text btn add
+ ************************************/
+.metro .input-control.text .btn-add {
+  /*background-color: #F0F0F0;*/
+  background-color: #fff;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  border: 0;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  min-height: 1px;
+  min-width: 1px;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+.metro .input-control.text .btn-add:after {
+  font-family: iconFont;
+  font-size: 12pt;
+}
+.metro .input-control.text .btn-save:not(:disabled):active {
+  background-color: #1d1d1d;
+  color: #ffffff;
+}
+.metro .input-control.text .btn-add:active {
+  left: auto;
+}
+.metro .input-control.text .btn-add:focus {
+  outline: 1px #ccc dotted ;
+}
+.metro .input-control.text input:focus ~ .btn-add{
+  display: block;
+}
+.metro .input-control.text input:not(:focus) ~ .btn-add:active {
+  display: block;
+}
+.metro .input-control.text .btn-add:after {
+  content: "\e08c";
+}
+.metro .input-control.text .btn-add {
+  display: block;
+}
+.metro .input-control.text input:disabled ~ .btn-add {
+  display: none;
+}
+
+
+/************************************ 
+ *  input-control text btn dropdown
+ ************************************/
+.metro .input-control.text .btn-dropdown {
+  /*background-color: #F0F0F0;*/
+  background-color: #fff;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  border: 0;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  min-height: 1px;
+  min-width: 1px;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+.metro .input-control.text .btn-dropdown:after {
+  font-family: iconFont;
+  font-size: 12pt;
+}
+.metro .input-control.text .btn-dropdown:not(:disabled):active {
+  background-color: #1d1d1d;
+  color: #ffffff;
+}
+.metro .input-control.text .btn-dropdown:active {
+  left: auto;
+}
+.metro .input-control.text .btn-dropdown:focus {
+  outline: 1px #ccc dotted ;
+}
+.metro .input-control.text input:focus ~ .btn-dropdown{
+  display: block;
+}
+.metro .input-control.text input:not(:focus) ~ .btn-dropdown:active {
+  display: block;
+}
+.metro .input-control.text .btn-dropdown:after {
+  content: "\e1ad";
+}
+.metro .input-control.text .btn-dropdown {
+  display: block;
+}
+.metro .input-control.text input:disabled ~ .btn-dropdown{
+  display: none;
+}
+
+
+/************************************ 
+ *  charms
+ ************************************/
+.metro .charms {
+  position: fixed;
+  top:45px;
+  width: 350px;
+  z-index:100;
+}
+
+/************************************** 
+ *   Cursor styles
+ *************************************/
+.cursor-pointer{
+    cursor:pointer;
+}
+
+.cursor-move{
+    cursor:move;
+}
+
+/************************************** 
+ *   indenting elements
+ *************************************/
+.text-indent-none {
+    text-indent:0px!important;
+}
+.text-indent-5 {
+    text-indent:5px;
+}
+.text-indent-10 {
+    text-indent:10px;
+}
+.text-indent-15 {
+    text-indent:15px;
+}
+.text-indent-20 {
+    text-indent:20px;
+}
+.text-indent-25 {
+    text-indent:25px;
+}
+
+
+
+/************************************** 
+ *   spacing elements
+ *************************************/
+.pull-right-5{
+    margin-left:5px;
+}
+.pull-right-10 {
+    margin-left:10px;
+}
+.pull-right-15 {
+    margin-left:15px;
+}
+.pull-right-20 {
+    margin-left:20px;
+}
+.pull-right-25{
+    margin-left:25px;
+}
+.pull-right-30{
+    margin-left:30px;
+}
+
+
+
+.push-down-5
+{
+    margin-top:5px;
+}
+
+.push-down-10
+{
+    margin-top:10px;
+}
+
+.push-down-15
+{
+    margin-top:15px!important;
+}
+
+.push-down-20
+{
+    margin-top:20px!important;
+}
+
+.push-down-25
+{
+    margin-top:25px!important;
+}
+
+.push-down-30
+{
+    margin-top:20px!important;
+}
+
+.push-down-40
+{
+    margin-top:40px!important;
+}
+
+
+
+
+/************************************** 
+ *   Notify Widget - customize
+ *************************************/
+.metro.notify-container {
+    position: fixed;
+    left: 20px;
+    top: 50px;
+    z-index: 1060;
+    width:350px!important;
+
+    text-align:center;
+    top: 20%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -250px;
+}
+
+/*********************************** 
+ * Media List ()
+ ********************************* */
+
+.media,
+.media-body {
+  overflow: hidden;
+  zoom: 1;
+  
+}
+
+.media-body{
+    width:50%!important;
+}
+
+li.media{
+    width:100%!important;
+}
+
+.media,
+.media .media {
+  margin-top: 15px;
+}
+
+.media:first-child {
+  margin-top: 0;
+}
+
+.media-object {
+  display: block;
+  
+}
+
+.media-heading {
+  margin: 0 0 5px;
+}
+
+.media > .pull-left {
+  margin-right: 10px;
+}
+
+.media > .pull-right {
+  margin-left: 10px;
+}
+
+.media-list {
+  padding-left: 0!important;
+  list-style: none;
+}
+

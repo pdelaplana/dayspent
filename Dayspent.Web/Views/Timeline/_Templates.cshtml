@@ -1,0 +1,108 @@
+﻿<script id="CreateActivityTemplate" type="text/html">
+    <!-- ko ifnot: adding -->
+    <div class="border fg-grayLight bd-grayLight padding10 cursor-pointer push-down-30 " style=" min-height:55px;width:100%;" data-bind="click: function(){adding(true)}">
+        What are you working on?
+    </div>
+    <!-- /ko -->
+    <!-- ko if: adding -->
+    <div data-bind="" class="padding10 bg-grayLighter bd-gray push-down-10 ">
+        <div class="inline-block">
+            <div class="text-bold text-muted" style="margin-bottom:10px">Add Time</div>
+            <div class="input-control text" style="width:130px">
+                <input type="text" data-bind="datepicker: startDate" />
+                <span class="btn-date"></span>
+            </div>
+            <div class="input-control text" style="width:100px">
+                <input type="text" data-bind="timepicker: startDate" />
+            </div>
+        </div>
+
+        <div class="inline-block place-right" style="margin-left:10px;padding-top:25px;">
+            <button style="height:40px" class="bg-red fg-white">Stop</button>
+        </div>
+        <div class="inline-block place-right">
+            <div class="text-bold text-muted" style="margin-bottom:10px">Timer</div>
+            <div class="input-control text bg-grayLighter" style="width:100px">
+                <input type="text" class=" inline-block" style="width:100px" placeholder="eg. 1h 12m" data-bind="value: timeSpent, timer: timeSpentInMins" />
+            </div>
+
+        </div>
+
+        <div class="input-control textarea">
+            <textarea data-bind="mdTextArea:description, value: description" style="min-height:60px"></textarea>
+        </div>
+        <div class="">
+            <ul data-bind="tagit: tags, tagitOptions: { enabled: true, initialTags: tags(), sourceUrl: '/api/tags' }"></ul>
+        </div>
+        <div class="clearfix">
+            <button class="primary place-right" style="height:35px" data-bind="click: create">Post</button>
+            <button class="link place-right" style="height:35px" data-bind="click: cancel">Close</button>
+        </div>
+    </div>
+    <!--/ko-->
+</script>
+
+<script id="EditActivityTemplate" type="text/html">
+    <div class="data bg-grayLighter bd-gray editActivityTemplate" style="padding:10px;" data-bind="visible: editing">
+        <div style="">
+            <div class="input-control text" style="width:130px">
+                <input type="text" data-bind="datepicker: startDate" />
+                <span class="btn-date"></span>
+            </div>
+            <div class="input-control text" style="width:100px">
+                <input type="text" data-bind="timepicker: startDate" />
+            </div>
+            <div class="input-control text place-right bg-grayLighter" style="width:200px">
+                <input type="text" class=" inline-block" style="width:180px" placeholder="eg. 1h20m..." data-bind="value: timeSpent" />
+            </div>
+        </div>
+        <div class="input-control textarea">
+            <textarea data-bind="mdTextArea:description, value: description" style="min-height:60px"></textarea>
+        </div>
+        <div class="">
+            <ul data-bind="tagit: tags, tagitOptions: { enabled: true, initialTags: tags(), sourceUrl: '/api/tags', addTag: addTag, removeTag: removeTag }"></ul>
+        </div>
+        <div class="clearfix">
+            <button class="primary place-right" style="height:35px" data-bind="click: update">Save</button>
+            <button class="link place-right" style="height:35px" data-bind="click: function(){editing(false)}">Close</button>
+        </div>
+    </div>
+</script>
+
+
+<script id="AdvanceDateFiltersTemplate" type="text/html">
+    <div id="AdvanceDateFilters" class="border-bottom clearfix">
+        <div class="grid fluid">
+            <div class="row">
+                <div class="span11 offset1">
+                    <h5 class="">Select Other Date Range</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span5 offset1">
+                    <label>From</label>
+                    <div class="input-control text">
+                        <input type="text" class="datepicker from" data-bind="datepicker: from" />
+                        <span class="btn-date"></span>
+                    </div>
+                </div>
+                <div class="span5 ">
+                    <label>To</label>
+                    <div class="input-control text">
+                        <input type="text" class="datepicker to" data-bind="datepicker:to" />
+                        <span class="btn-date"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="span11 offset1">
+                    <button class="primary" data-bind="click: function(){ set('other') }">Apply</button>
+                    <button class="link" data-bind="click: close">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>
+

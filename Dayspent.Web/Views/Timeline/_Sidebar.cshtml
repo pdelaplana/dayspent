@@ -1,0 +1,43 @@
+﻿<nav id="TimelineSidebar" class="sidebar dark" style="overflow-y:auto;overflow-x:hidden">
+    <ul>
+        <li>
+            <a class="dropdown-toggle" name="timeline" href="#" style="font-size:22px">My Timeline</a>
+            <ul class="dropdown-menu" data-role="dropdown">
+                <li><a href="">My Timeline </a> </li>
+                <li><a href="">Development Timeline </a> </li>
+                <li class="divider"></li>
+                <li><a href="">New...</a></li>
+            </ul>
+        </li>
+        <li data-bind="css: { 'stick bg-red' : viewing() == 'Dashboard' }"><a href="" data-bind="click: viewDashboard">Dashboard</a></li>
+        <li data-bind="css: {'stick bg-red': viewing() == 'ActivityStream'}"><a href="" data-bind="click: viewActivityStream">Activities</a></li>
+        <li class="text-indent-20" data-bind="visible: viewing() == 'ActivityStream'">
+            <a href="" class="dropdown-toggle " name="tags">Tags <span class="label bg-red fg-white text-indent-none" data-bind="text: filters.tags().length"></span></a>
+            <ul class="dropdown-menu keep-open text-indent-5" data-role="dropdown">
+                <li data-bind="css:{ 'disabled' : filters.tags().length == 0  }">
+                    <a href="" data-bind="click: filters.clearAllTags">Clear All</a>
+                </li>
+                <li class="divider"></li>
+                <!-- ko foreach: tags -->
+                <li>
+                    <a href="" data-bind="click: addOrRemoveFromFilters">
+                        <i class="icon-checkbox-unchecked" data-bind="css: { 'icon-checkbox-unchecked' : selected() == false, 'icon-checkbox' : selected() == true }"></i>
+                        <span data-bind="text:name"></span>
+                    </a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </li>
+
+        <li class="text-indent-20" data-bind="visible: viewing() == 'ActivityStream'"><a href="">Team</a></li>
+
+        
+        <li data-bind="css: {'stick bg-red': viewing() == 'Reports'}"><a href="" data-bind="click:viewReports"> Reports</a></li>
+
+        <li ><a href="">Settings</a></li>
+
+        
+    </ul>
+</nav>
+
+

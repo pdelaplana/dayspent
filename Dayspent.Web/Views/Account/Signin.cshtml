@@ -1,0 +1,51 @@
+﻿@model Dayspent.Web.Models.SigninViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout_NoHeader.cshtml";
+    ViewBag.Title = "Signin | Dayspent - Simple Time Tracking";
+}
+
+<div class="bg-dark">
+
+    <div class=" " style="margin-top:70px">
+        <div class="container padding20" style="">
+            <div class="grid fluid">
+                <div class="row ">
+                    <div class="span5">
+                        <img src="~/content/images/dayspent-banner-white.png" class="" style="padding:0" />
+
+                    </div>
+                    <div class="span5">
+                        <section id="loginForm" class="fg-white">
+                            @using (Html.BeginForm("signin", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                @Html.EditorFor(m => m.Email, "textbox")
+                                @Html.EditorFor(m => m.Password, "password")
+                                @Html.EditorFor(m => m.RememberMe, "checkbox")
+                                <p style="margin-top:10px">
+                                    <button type="submit" class="large primary">Sign In <i class="icon-arrow-right-3"></i></button>
+                                    &nbsp;
+                                    <a href="/account/forgotpassword">Can't sign in</a>
+                                </p>
+                                <p class="fg-white">
+                                    New here?
+                                    @Html.ActionLink("Register to create an account", "register")
+                                    or
+                                    @Html.ActionLink("find out more.", "index", "home")
+                                </p>
+                            }
+                        </section>
+
+                    </div>
+                    <div class="span7" style="display:none">
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl } )
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

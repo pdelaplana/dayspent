@@ -1,0 +1,126 @@
+﻿html, body {
+    height:auto;
+}
+
+.metro .shadow {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/**************************************** 
+ *    page region styles
+ ****************************************/
+.page-region {
+    margin-top:20px;
+    
+}
+
+
+.page-region-sidebar{
+    position:absolute;
+    top:45px;
+    left:0px;
+    width:300px;
+    padding-top:12px;
+    min-height:93%;
+    height:93%;
+    min-height:0;
+    height:0;
+}
+
+/* Set padding to keep content from hitting the edges */
+.page-region-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    min-height:0!important;
+}
+
+.page-region.with-sidebar .page-region-content{
+    margin-left:300px;
+}
+
+/**************************************** 
+ *    sidebar custom styles
+ ****************************************/
+.metro .sidebar{
+    position:fixed;
+    width:300px;
+}
+
+.metro .sidebar ul li {
+    border-left:5px solid transparent;
+}
+
+
+
+
+
+
+
+
+/**************************************** 
+ *    block ui styles
+ ****************************************/
+.blockMsg
+{
+    border:0!important;
+    /*height:250px;*/
+    width:500px!important;
+    
+    font-family: 'Segoe UI Light', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+    font-weight: 200;
+    font-size: 20pt;
+    letter-spacing: 0.01em;
+    line-height: 24pt;
+    font-size: 12pt;
+    
+    background-color: transparent!important;
+    color:#fff!important;
+    text-align:inherit;
+}
+
+/**************************************** 
+ *    activities lisview
+ ****************************************/
+#ActivityContainer{
+    padding:10px;
+}
+#ActivityContainer .listview .list
+{
+    min-width:100%
+}
+
+/**************************************** 
+ *    markdown custom styles
+ *      hide preview pane
+ ****************************************/
+.mdd_preview{
+    display:none;
+}
+
+
+/**************************************** 
+ *    popModal custom styles
+ ****************************************/
+.popModal{
+    padding-left:0;
+    padding-right:0;
+    padding:0;
+}
+.popModal_content {
+    margin-bottom:10px!important;
+}
+
+.popModal_content .ui-datepicker{
+    /*
+    margin:5% 0 0 5%;
+    width:90%;
+        */
+     width:100%;
+}
+
+/**************************************** 
+ *    inline datepicker custom styles
+ ****************************************/
+div.datepicker .ui-datepicker {
+
+}

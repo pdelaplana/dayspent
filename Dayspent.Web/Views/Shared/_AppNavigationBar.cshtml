@@ -1,0 +1,42 @@
+﻿
+<div class="navigation-bar fixed-top dark ntm ntp"  id="AppNavigationBar">
+    <div class="navigation-bar-content ">
+        @Html.Partial("_NavBarLogo")
+
+        <span class="element-divider"></span>
+       
+        
+        @if (User.Identity.IsAuthenticated)
+        {
+        <div class="element place-right">
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-user"></i>
+                @ViewBag.AuthenticatedUser.FullName
+            </a>
+            <ul class="dropdown-menu place-right dark" data-role="dropdown">
+                <li><a href="#/profile">Profile </a></li>
+                @if (User.IsInRole("ADMIN") || User.IsInRole("Admin"))
+                { 
+                <li class="divider"></li>
+                <li><a href="#/users">Users </a></li>
+                }
+                <li class="divider"></li>
+                <li><a href="javascript:$('form#signout').submit()">Sign out</a></li>
+            </ul>
+        </div>
+        }
+        else
+        {
+            <a class="element place-right">
+                Sign in
+            </a>
+        }
+
+    </div>
+</div>
+
+
+@using (Html.BeginForm("signout", "account", FormMethod.Post, new { id = "signout" }))
+{
+    @Html.AntiForgeryToken()
+}

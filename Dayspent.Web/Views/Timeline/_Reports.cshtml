@@ -1,0 +1,24 @@
+﻿<div id="Reports" class="grid fluid no-margin-top">
+    <div class="row">
+        <div class="span5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tag Group</th>
+                        <th>Time Spent</th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: tagGroups">
+                    <tr>
+                        <td><span data-bind="text:name"></span></td>
+                        <td><span data-bind="text:timeSpent"></span></td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
