@@ -17,13 +17,19 @@
         repository.timeSpent = self.timeSpent();
         repository.tags = self.tags();
         repository.create().done(function (result) {
-            $.timeline.stream.activities.insert(new ActivityViewModel(result.data), 0);
+
+            // check if the new activity falls within period filters
+            if (moment(result.data.startDate).isAfter(moment($.timeline.stream.periodFilters.from()))
+                && moment(result.data.startDate).isBefore(moment($.timeline.stream.periodFilters.to()))){
+
+                $.timeline.stream.activities.insert(new ActivityViewModel(result.data), 0);
+            }
 
             self.description('');
             self.startDate(moment().toDate());
             self.timeSpent('');
             self.timeSpentInMins(0);
-            self.tags('');
+            self.tags([]);
 
             $.Notify.show("A new time entry has been added.")
 

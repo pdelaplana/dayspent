@@ -119,7 +119,7 @@ function TimelineViewModel() {
     // period filters
     //
     self.periodFilters = {
-        selection: ko.observable('All'),
+        selection: ko.observable('Loading...'),
         from: ko.observable(),
         to: ko.observable(),
         enabled: ko.observable(false),
@@ -271,7 +271,7 @@ function TimelineViewModel() {
                     //if (activityDate == thisDate){
                         dateGroup = value;
                         return false;
-                    }
+                    } 
                 });
                 
                 if (dateGroup == null) {
@@ -284,7 +284,7 @@ function TimelineViewModel() {
                         if (diffDays == 1) {
                         //if (activityDate>thisDate){
                             dateGroup = new DateGroup(activityDate);
-                            self.dateGroups.insert(dateGroup, index+1);
+                            self.dateGroups.insert(dateGroup, index);
                             return false;
                         }
                     })  

@@ -1,7 +1,6 @@
 ﻿function DashboardViewModel() {
     var self = this;
 
-    self.weekdays = [];
 
     //
     // public observables
@@ -16,14 +15,13 @@
         var repository = new ActivityRepository();
         repository.period.from = moment().startOf('week');
         repository.period.to = moment().endOf('week');
-
         self.selectedPeriod(moment(repository.period.from).format('D') + ' - ' + moment(repository.period.to).format('D') + ' ' + moment(repository.period.from).format('MMMM'));
 
-
         // build weekdays array
-        var currentDate = moment(repository.period.from);
+        var weekdays = [],
+            currentDate = moment(repository.period.from);
         for (i = 0; i < 7; i++) {
-            self.weekdays.push(new WeekDay(moment(currentDate).weekday(), moment(currentDate).format('ddd l'), 0));
+            weekdays.push(new WeekDay(moment(currentDate).weekday(), moment(currentDate).format('ddd l'), 0));
             currentDate = moment(currentDate).add(1, 'day');
         }
 
@@ -32,8 +30,8 @@
 
             $.each(result, function (i, activity) {
                 var day = moment(activity.startDate).weekday();
-                if (self.weekdays.length > 0) {
-                    $.each(self.weekdays, function (i, weekday) {
+                if (weekdays.length > 0) {
+                    $.each(weekdays, function (i, weekday) {
                         if (weekday.day == day) {
                             weekday.timeSpentInMins = weekday.timeSpentInMins + activity.timeSpentMins;
                             found = true;
@@ -41,13 +39,13 @@
                         }
                     })
                     if (!found)
-                        self.weekdays.push(new WeekDay(day, activity.dateGroup, activity.timeSpentMins));
+                        weekdays.push(new WeekDay(day, activity.dateGroup, activity.timeSpentMins));
                 } else {
-                    self.weekdays.push(new WeekDay(day, activity.dateGroup, activity.timeSpentMins));
+                    weekdays.push(new WeekDay(day, activity.dateGroup, activity.timeSpentMins));
                 }
             });
 
-            var chart = new WeeklyChart(self.weekdays);
+            var chart = new WeeklyChart(weekdays);
 
         })
 
@@ -58,6 +56,12 @@
 
     }
 
+
+    //
+    // do init stuff
+    //
+
+    self.showWeeklyChart();
   
 
 }

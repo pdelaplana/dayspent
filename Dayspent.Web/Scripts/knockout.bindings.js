@@ -319,7 +319,8 @@ ko.bindingHandlers.tagit = {
     },
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var data = ko.utils.unwrapObservable(valueAccessor());
-        $(element).tagit('reset');
+        //$(element).tagit('reset');
+        $(element).tagit('fill', data);
     }
 }
 
