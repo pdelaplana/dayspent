@@ -6,6 +6,7 @@
     <!-- /ko -->
     <!-- ko if: adding -->
     <div data-bind="" class="padding10 bg-grayLighter bd-gray push-down-10 ">
+        
         <div class="inline-block">
             <div class="text-bold text-muted" style="margin-bottom:10px">Add Time</div>
             <div class="input-control text" style="width:130px">
@@ -17,17 +18,27 @@
             </div>
         </div>
 
-        <div class="inline-block place-right" style="margin-left:10px;padding-top:25px;">
-            <button style="height:40px" class="bg-red fg-white">Stop</button>
-        </div>
-        <div class="inline-block place-right">
-            <div class="text-bold text-muted" style="margin-bottom:10px">Timer</div>
+        <!-- ko if: captureMode() == 'timer' -->
+        <div class="inline-block place-right" style="width:220px">
+            <div class="text-muted" style="margin-bottom:10px">Duration <small class="">(<a href="" data-bind="click: toggleCaptureMode">Add manually</a>)</small></div>
             <div class="input-control text bg-grayLighter" style="width:100px">
-                <input type="text" class=" inline-block" style="width:100px" placeholder="eg. 1h 12m" data-bind="value: timeSpent, timer: timeSpentInMins" />
+                <input type="text" class=" inline-block" style="width:100px" placeholder="Add time..." data-bind="value: timeSpent" />
+            </div>
+            <button style="height:30px" class="bg-red fg-white" data-bind="click: timer.stop, visible: timer.enabled">Stop</button>
+            <button style="height:30px" class="bg-green fg-white" data-bind="click: timer.start, visible: !timer.enabled()">Start</button>
+            <button style="height:30px" class="bg-green fg-white" data-bind="click: timer.reset">Reset</button>
+        </div>
+        <!-- /ko-->
+        
+        <!-- ko if: captureMode() == 'manual' -->
+        <div class="inline-block place-right" style="width:220px">
+            <div class="text-muted" style="margin-bottom:10px">Duration <small class="">(<a href="" data-bind="click: toggleCaptureMode">Use timer</a>)</small></div>
+            <div class="input-control text bg-grayLighter">
+                <input type="text" class=" inline-block" style="" placeholder="Add time..." data-bind="value: timeSpent" />
             </div>
 
         </div>
-
+        <!-- /ko-->
         <div class="input-control textarea">
             <textarea data-bind="mdTextArea:description, value: description" style="min-height:60px"></textarea>
         </div>

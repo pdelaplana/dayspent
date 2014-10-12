@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Dayspent.Web.Controllers
 {
+    [Authorize]
     public class TimelineController : Controller
     {
         // GET: timeline

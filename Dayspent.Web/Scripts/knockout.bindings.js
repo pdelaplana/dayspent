@@ -283,6 +283,7 @@ ko.bindingHandlers.tagit = {
 
         var options = $.extend({
             initialTags: null,
+            minLength: 0,
             triggerKeys: ['enter', 'tab'],
             enabled: true,
             tagSource: function (request, response) {
@@ -350,7 +351,8 @@ ko.bindingHandlers.timer = {
             observable = valueAccessor();
 
         var timeIs = function () {
-            observable(observable() + 1);
+            if ((bindings.stopped == undefined) || (bindings.stopped != undefined && !bindings.stopped()))
+                observable(observable() + 1);
             bindings.value($.utils.formatTimeSpent(observable()));
             
         }

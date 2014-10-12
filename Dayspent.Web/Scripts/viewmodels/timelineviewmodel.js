@@ -6,7 +6,7 @@ $.utils = {
             return str.length < max ? pad("0" + str, max) : str;
         }
 
-        if (timeSpentMins == null)
+        if (timeSpentMins == null || timeSpentMins == 0)
             return '0m';
 
         var hour = Math.floor(timeSpentMins / 60);
@@ -96,13 +96,14 @@ function TimelineViewModel() {
     self.activitiesHolder = ko.observableArray();
     self.activities = ko.observableArray([]);
     self.tagGroups = ko.observableArray([]);
+    self.allTags = ko.observableArray([]);
 
     self.newActivity = new CreateActivityViewModel();
 
     //
     // state
     //
-    self.activities.loading = ko.observable(true);//.extend({ rateLimit: { timeout: 100, method: 'notifyAtFixedRate' } });
+    self.activities.loading = ko.observable(true);
 
     self.activities.loaded = ko.computed(function () {
         var loadingComplete = (self.activities().length == activitiesData.length); 
@@ -321,6 +322,9 @@ function TimelineViewModel() {
     
     }, null, 'arrayChange');
     
+    self.allTags.subscribe(function () {
+
+    }, null, 'arrayChange')
     
     //
     // tagGroups extenions
@@ -383,6 +387,7 @@ function TimelineViewModel() {
     // get data from server
     //self.get();
 
+    
     // make this timeline available globally
     $.timeline.stream = self;
 
