@@ -68,8 +68,6 @@ function TimelineViewModel() {
 
     function loadActivities(data) {
 
-        self.activities.loading(true);
-
         //$.blockUI({ message: '<div class="fg-darken"><h2>Getting data...</h2><img src="/content/images/ajax-loader-bar-1.gif" alt="" /></div>' });
         //$('#ActivityStream').block({ message: '<div class="fg-darken"><h2>Loading...</h2><img src="/content/images/ajax-loader-bar-1.gif" alt="" /></div>' });
 
@@ -97,6 +95,7 @@ function TimelineViewModel() {
     self.activities = ko.observableArray([]);
     self.tagGroups = ko.observableArray([]);
     self.allTags = ko.observableArray([]);
+    self.filteredTags = ko.observableArray([]);
 
     self.newActivity = new CreateActivityViewModel();
 
@@ -182,6 +181,7 @@ function TimelineViewModel() {
             repository.period.from = self.periodFilters.from();
             repository.period.to = self.periodFilters.to();
 
+            self.activities.loading(true);
             self.activities.removeAll();
             repository.get().done(function (result) {
                 loadActivities(result);
@@ -194,7 +194,10 @@ function TimelineViewModel() {
     // tag filters
     //
     self.filterByTags = function(selectedTags) {
-        if (selectedTags == null) return
+        if (selectedTags == null) return;
+        self.filteredTags(selectedTags);
+
+        /*
         ko.utils.arrayForEach(self.activities(), function (activity) {
             if (selectedTags.length == 0) {
                 activity.visible(true);
@@ -209,6 +212,7 @@ function TimelineViewModel() {
                 activity.visible(showable);
             }
         })
+        */
     };
     
     //
@@ -322,7 +326,23 @@ function TimelineViewModel() {
     
     }, null, 'arrayChange');
     
-    self.allTags.subscribe(function () {
+    self.filteredTags.subscribe(function () {
+
+        ko.utils.arrayForEach(self.activities(), function (activity) {
+            if (self.filteredTags().length == 0) {
+                activity.visible(true);
+            } else {
+                activity.visible(false);
+                var showable = true;
+                ko.utils.arrayForEach(self.filteredTags(), function (tag) {
+                    if ($.inArray(tag, activity.tags()) == -1) {
+                        showable = false;
+                    }
+                })
+                activity.visible(showable);
+            }
+        })
+      
 
     }, null, 'arrayChange')
     
@@ -382,11 +402,17 @@ function TimelineViewModel() {
         
     }
 
-
-        
+    
     // get data from server
     //self.get();
 
+    // init
+    var repository = new TagRepository();
+    repository.get().done(function (result) {
+        $.each(result, function (index, value) {
+            self.allTags.push(new Tag(value));
+        })
+    })
     
     // make this timeline available globally
     $.timeline.stream = self;

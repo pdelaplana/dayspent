@@ -1,7 +1,37 @@
 ﻿<div id="ActivityStream" class="grid fluid no-margin-top">
     <div class="row">
         <div class="span8">
-            <div class="push-down-20 " data-bind="template: { name:'CreateActivityTemplate', data: newActivity }, visible:true"></div>
+            <div class="push-down-20">
+                <div class="input-control text" style="width:100%">
+                    <input type="text" placeholder="Search...">
+                    <button class="btn-search"></button>
+                </div>
+            </div>
+            <div class=" " data-bind="template: { name:'CreateActivityTemplate', data: newActivity }, visible:true"></div>
+
+            <nav class="navigation-bar light bg-hover-white">
+                <nav class="navigation-bar-content">
+                    <div class="element">
+                        <a href="#" class="dropdown-toggle">
+                            Filters
+                        </a>
+                        <ul class="dropdown-menu" data-role="dropdown">
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('today') }">Today</a></li>
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('yesterday') }">Yesterday</a></li>
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('thisweek') }">This Week</a></li>
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('lastweek') }">Last Week</a></li>
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('thismonth') }">This Month</a></li>
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('lastmonth') }">Last Month</a></li>
+                            <li><a href="#" data-bind="click: function(){ periodFilters.set('all') }">All Time</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" data-bind="click: periodFilters.open">Other...</a></li>
+                        </ul>
+                    </div>
+
+                </nav>
+                
+            </nav>
+
             <div class="push-down-25 border-top">
                 <div class="button-dropdown push-down-15" style="">
                     <button class="dropdown-toggle bg-transparent" style="font-size:20px" data-bind="text: 'Show '+ periodFilters.selection() "></button>
@@ -22,6 +52,8 @@
             <div data-bind="visible: periodFilters.enabled">
                 <div data-bind="datePeriodSelection: $data.periodFilters, templateId: 'AdvanceDateFiltersTemplate'"></div>
             </div>
+
+            
 
             <div style="text-align:center" data-bind="visible:activities.loading" >
                 <div class="padding20 ">
@@ -44,15 +76,15 @@
                         <div class="list-content border-bottom">
                             <img class="icon" data-bind="attr: { src: '/api/avatar/'+activityByUserId() }" />
                             <div class="data" data-bind="visible: !editing()">
-                                <span class="list-title" style="margin-bottom:10px">
+                                <div class="list-title" style="margin-bottom:10px">
                                     <span class="item-title list-title" data-bind="text: activityByUserFullName"></span>
                                     <span class="list-remark text-muted" data-bind="text: moment(startDate()).format('llll')"></span>
-                                </span>
-                                <span class="list-subtitle" data-bind="markdownToHtml: description"></span>
-                                <div class="" data-bind="visible: tags().length > 0" >
+                                </div>
+                                <div class="list-subtitle" data-bind="markdownToHtml: description"></div>
+                                <div class="block clearfix" data-bind="visible: tags().length > 0" style="width:100%">
                                     <ul style="border:0;background-color:transparent;margin-bottom:0;overflow:visible;min-height:1px" data-bind="tagit: tags, tagitOptions: { enabled: false, initialTags: tags(), sourceUrl: '/api/tags' }"></ul>
                                 </div>
-                                <div class="list-remark fg-grayLight push-down-10">
+                                <div class="list-remark fg-grayLight push-down-15">
                                     <a href="" data-bind="click: function(){ editing(true); }">Edit</a>
                                     &middot;
                                     <a href="" data-bind="click: remove ">Delete</a>
@@ -84,7 +116,26 @@
                 <h3 class="text-center fg-white" data-bind="text: totalTimeSpent">Total Time Spent</h3>
             </div>
 
-            
+            <div class="push-down-20">
+                <h3>Tags</h3>
+                <!-- ko foreach: filteredTags-->
+                <span class="label bg-dark fg-white" ><span href="" data-bind="text:$data"></span> <i class="icon-cancel-2" style="font-size:xx-small"></i> </span>
+                <!-- /ko -->
+            </div>
+
+            <div class="panel push-down-20" data-role="panel">
+                <div class="panel-header">
+                    Tags
+                </div>
+                <div class="panel-content">
+                    <ul class="unstyled">
+                        <!-- ko foreach: allTags-->
+                        <li style="margin-top:10px"><i class="icon-checkbox"></i> <span data-bind="text:name"></span></li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
