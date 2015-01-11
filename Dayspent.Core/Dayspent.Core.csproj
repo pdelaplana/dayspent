@@ -61,9 +61,19 @@
     <Compile Include="Migrations\201409050243471_InitialCreate.Designer.cs">
       <DependentUpon>201409050243471_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411300754297_InitialCreateStatusReports.cs" />
+    <Compile Include="Migrations\201411300754297_InitialCreateStatusReports.Designer.cs">
+      <DependentUpon>201411300754297_InitialCreateStatusReports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ReportingGroup.cs" />
+    <Compile Include="Models\ReportingGroupMember.cs" />
+    <Compile Include="Models\StatusReportItemTag.cs" />
     <Compile Include="Models\ApplicationDb.cs" />
     <Compile Include="Models\Auditable.cs" />
+    <Compile Include="Models\StatusReport.cs" />
+    <Compile Include="Models\StatusReportCategory.cs" />
+    <Compile Include="Models\StatusReportItem.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ActivityTag.cs" />
@@ -71,14 +81,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationRepository.cs" />
     <Compile Include="Repository\CommandResult.cs" />
+    <Compile Include="Repository\Commands\ApplicationDBExtensions.cs" />
+    <Compile Include="Repository\Commands\CreateStatusReportItemTagCommand.cs" />
+    <Compile Include="Repository\Commands\CreateStatusReportItemCommand.cs" />
     <Compile Include="Repository\Commands\CreateActivityTagCommand.cs" />
+    <Compile Include="Repository\Commands\CreateStatusReportCommand.cs" />
+    <Compile Include="Repository\Commands\DeleteStatusReportItemTagCommand.cs" />
+    <Compile Include="Repository\Commands\DeleteStatusReportCommand.cs" />
+    <Compile Include="Repository\Commands\DeleteStatusReportItemCommand.cs" />
     <Compile Include="Repository\Commands\DeleteActivityTagCommand.cs" />
     <Compile Include="Repository\Commands\DeleteActivityCommand.cs" />
+    <Compile Include="Repository\Commands\SubmitStatusReportCommand.cs" />
+    <Compile Include="Repository\Commands\RepositionStatusReporItemsCommand.cs" />
+    <Compile Include="Repository\Commands\UpdateTimeSpentCommand.cs" />
+    <Compile Include="Repository\Commands\UpdateStatusReportItemCommand.cs" />
+    <Compile Include="Repository\Commands\UpdateStatusReportCommand.cs" />
     <Compile Include="Repository\Commands\UpdateActivityCommand.cs" />
     <Compile Include="Repository\Commands\CreateTimelineCommand.cs" />
     <Compile Include="Repository\Commands\CreateActivityCommand.cs" />
     <Compile Include="Repository\IApplicationRepository.cs" />
     <Compile Include="Repository\IApplicationRepositoryCommand.cs" />
+    <Compile Include="Utils\StringParserExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Livefrog\Livefrog.Commons\Livefrog.Commons.csproj">
@@ -100,6 +123,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409050243471_InitialCreate.resx">
       <DependentUpon>201409050243471_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411300754297_InitialCreateStatusReports.resx">
+      <DependentUpon>201411300754297_InitialCreateStatusReports.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

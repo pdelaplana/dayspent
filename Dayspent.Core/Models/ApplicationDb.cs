@@ -55,7 +55,7 @@ namespace Dayspent.Core.Models
         {
             var utcDate = DateTime.UtcNow;
             var changeSet = ChangeTracker.Entries<Auditable>();
-            if (changeSet != null)
+            if ((changeSet != null) && (_appContext != null))
             {
 
                 foreach (DbEntityEntry<Auditable> entry in changeSet)
@@ -90,6 +90,13 @@ namespace Dayspent.Core.Models
         
         public DbSet<Tag> Tags { get; set; }
 
-        
+        public DbSet<StatusReport> StatusReports { get; set; }
+
+        public DbSet<StatusReportItem> StatusReportItems { get; set; }
+        public DbSet<StatusReportItemTag> StatusReportItemTags { get; set; }
+
+        public DbSet<StatusReportCategory> StatusReportCategories { get; set; }
+
+        public DbSet<ReportingGroup> ReportingGroups { get; set; }
     }
 }

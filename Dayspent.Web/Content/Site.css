@@ -1,6 +1,16 @@
 ﻿html, body {
     height:auto;
+    overflow:hidden;
 }
+
+input[type=text]{
+    outline-width:0;
+}
+input[type=text]:focus {
+    outline:none;
+    
+}
+
 
 .metro .shadow {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2);
@@ -10,7 +20,7 @@
  *    page region styles
  ****************************************/
 .page-region {
-    margin-top:20px;
+    margin-top:0px;
     
 }
 
@@ -35,7 +45,7 @@
 }
 
 .page-region.with-sidebar .page-region-content{
-    margin-left:300px;
+    margin-left:230px;
 }
 
 /**************************************** 
@@ -43,7 +53,7 @@
  ****************************************/
 .metro .sidebar{
     position:fixed;
-    width:300px;
+    width:230px;
 }
 
 .metro .sidebar ul li {
@@ -123,4 +133,120 @@
  ****************************************/
 div.datepicker .ui-datepicker {
 
+}
+
+/**************************************** 
+ *    #MyReports custom styles
+ ****************************************/
+#MyReports .row > div{
+    height:100%;
+}
+
+#MyReports #StatusReportsList.listview{
+    height:92%;
+    overflow:auto
+}
+
+#MyReports #StatusReportsList.listview .list{
+   min-width:0;
+   width:99%;
+}
+
+#MyReports div.list {
+    width:99%;
+}
+
+#MyReports div.input-control.text {
+      
+    /*
+        margin-bottom:0px;
+    */
+      
+}
+
+
+#MyReports div.input-control.textarea {
+      
+}
+
+#MyReports #SelectedStatusReport div.item-links{
+    height:25px;
+}
+
+#MyReports #SelectedStatusReport div.item-links a, #MyReports #SelectedStatusReport div.item-links span{
+    margin-left:10px;
+    font-size:small;
+}
+
+#MyReports #SelectedStatusReport div.item-links input[type=text]{
+    width:50px;
+    margin-left:10px;
+    font-size:small;
+}
+
+#MyReports #SelectedStatusReport ul.tagit.transparent{
+ 
+    border:0;background-color:transparent;margin-bottom:5px;overflow:visible;min-height:25px;
+
+
+}
+
+#MyReports #SelectedStatusReport ul.tagit.transparent input{
+    /*
+        border-bottom:dashed 1px!important;
+    border-bottom-color:#ccc!important;
+    
+    */
+    font-size:14px;   
+}
+
+#MyReports #SelectedStatusReport .tags-container {
+ 
+    font-size:14px;   
+}
+
+
+/*
+    placeholder styles
+
+*/
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ccc;
+    font-size:10px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #ccc;
+   opacity:  1;
+   font-size:10px;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #ccc;
+   opacity:  1;
+   font-size:10px;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #999999;
+   font-size:11px!important;
+}
+
+
+/*
+    text input, textarea no border
+
+*/
+
+textarea.transparent, input[type=text].transparent{
+    border:0!important;
+    margin:0;
+    padding:0;
+    outline:0;
+    border-bottom: 1px #d9d9d9 solid!important;
+
+    
+}
+
+textarea{
+    font-size:11pt;
+    
 }

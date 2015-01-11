@@ -21,6 +21,9 @@ namespace Dayspent.Core.Repository
 
         IQueryable<Tag> Tags { get; }
 
+        IQueryable<StatusReport> StatusReports { get; }
+
+        IQueryable<StatusReportCategory> StatusReportCategories { get; }
 
     }
 }

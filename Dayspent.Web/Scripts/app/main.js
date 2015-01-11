@@ -44,8 +44,10 @@ $(function () {
     app.user.userName = authenticatedUser.userName;
     app.user.fullName = authenticatedUser.fullName;
     app.ui.addPart('appNavigationBar', new AppNavigationBar()).bindTo('#AppNavigationBar');
+    app.ui.addPart('appSideBar', new AppSideBar()).bindTo('#AppSideBar');
+
     app.ui.setWindowTitle('Home');
 
-    app.start('app/#/timeline');
+    app.start('app/#/myreports');
 
 })

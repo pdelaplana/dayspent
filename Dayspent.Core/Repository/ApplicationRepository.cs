@@ -49,6 +49,16 @@ namespace Dayspent.Core.Repository
             get { return _db.Tags.Where(t => t.TenantId == _db.Context.TenantID).AsQueryable(); }
         }
 
+
+        public IQueryable<StatusReport> StatusReports
+        {
+            get { return _db.StatusReports.Where(t => t.TenantId == _db.Context.TenantID).AsQueryable(); }
+        }
+
+        public IQueryable<StatusReportCategory> StatusReportCategories
+        {
+            get { return _db.StatusReportCategories.Where(t => t.TenantId == _db.Context.TenantID).AsQueryable(); }
+        }
         
     }
 }

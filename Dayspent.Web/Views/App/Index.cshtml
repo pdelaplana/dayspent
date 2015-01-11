@@ -1,8 +1,12 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout_Auth.cshtml";
-    ViewBag.Title = "Dayspent - Time Tracking";
+    ViewBag.Title = "Dayspent | Daily Status Reporting";
 }
 
-<div id="application-container">
-
+<div class="page-region with-sidebar" style="min-width:1070px">
+    <div class="page-region-sidebar no-padding no-margin">
+        @Html.Partial("_AppSidebar")
+    </div>
+    <div id="application-container" class="page-region-content no-padding" style="height:100%;"></div>
 </div>
+

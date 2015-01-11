@@ -54,6 +54,10 @@
                 $(options.elements).unblock();
             }
 
+        },
+
+        notify: function (message) {
+            $.Notify.show(message);
         }
 
     }

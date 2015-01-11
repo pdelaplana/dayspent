@@ -104,7 +104,9 @@ ko.bindingHandlers.markdownToHtml = {
         var bindings = allBindings(),
             observable = valueAccessor(),
             markdown = new MarkdownDeep.Markdown();
-        $(element).html(markdown.Transform(observable()));
+
+        $(element).html(markdown.Transform(observable()).replace(/(^|\W)(#[a-z\d][\w-]*)/ig, '$1<span class="label bg-amber fg-white">$2</span>'));
+        
     }
 }
 
@@ -120,7 +122,7 @@ ko.bindingHandlers.popModalCalendar = {
             options = $.extend({
                 html: '<div class="popModal_calendar"></div><div class="padding10 nbp"><a href="" class="button">Clear</a></div>',
                 //html: div.get(0),
-                placement: 'bottomLeft',
+                placement: bindings.placement != null ? bindings.placement : 'bottomLeft',
                 showCloseBut: true,
                 onDocumentClickClose: true,
                 onOkBut: function () { },
@@ -129,6 +131,7 @@ ko.bindingHandlers.popModalCalendar = {
 
                     var calendar = $('.popModal_calendar').datepicker();
                     var clearBtn = $(calendar).next('div').find('.button');
+                    if (bindings.noClearButton) clearBtn.hide();
 
                     var funcOnClear = function (event) {
                         observable(null);
@@ -170,10 +173,7 @@ ko.bindingHandlers.popModalCalendar = {
 
             } else {
                 $(this).popModal(options);
-
-
                 $(this).addClass('popModalOpen');
-
             }
             event.preventDefault();
             event.stopPropagation();
@@ -365,3 +365,35 @@ ko.bindingHandlers.timer = {
     }
 }
 
+
+/**
+ * custom binding handler to add hover effects
+ * 
+ */
+ko.bindingHandlers.hover = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var bindings = allBindings(),
+            observable = valueAccessor(),
+            prepend = $('<div class="grip">&nbsp;</div>');
+
+        $(element).hover(
+            function () { $(this).prepend(prepend) },
+            function () { prepend.remove() }
+            );
+        
+    },
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+
+    }
+}
+
+/**
+ * custom binding handler to add autosize plugin to textarea
+ * 
+ */
+ko.bindingHandlers.autosize = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        $(element).autosize();
+    }
+}

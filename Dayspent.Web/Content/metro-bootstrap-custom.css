@@ -549,6 +549,10 @@ ul.ui-autocomplete{
     cursor:move;
 }
 
+.cursor-default{
+    cursor:default;
+}
+
 /************************************** 
  *   indenting elements
  *************************************/
@@ -675,7 +679,7 @@ li.media{
 .media .media {
   margin-top: 15px;
 }
-
+    
 .media:first-child {
   margin-top: 0;
 }
@@ -702,3 +706,26 @@ li.media{
   list-style: none;
 }
 
+/*
+    grip
+*/
+div.grip
+{
+	background:#f8f8f8; 
+	background-image:url('/content/mdd_gripper.png');
+	background-position:center center;
+	padding-left:2px;
+	padding-right:2px;
+	height:9px;
+	border:solid 1px #d0d0d0;
+	margin-top:-1px;
+	cursor:n-resize;
+
+    width:10px;
+    height:80%;
+    padding-left:0px;
+    padding-right:0px;
+    cursor:move;
+    position:absolute;
+    left:-10px;
+}

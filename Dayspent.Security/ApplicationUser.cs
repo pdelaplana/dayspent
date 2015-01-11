@@ -11,7 +11,6 @@ namespace Dayspent.Security
 {
     public class ApplicationUser : IdentityUser
     {
-        
         [MaxLength(50)]
         public string FullName { get; set; }
 

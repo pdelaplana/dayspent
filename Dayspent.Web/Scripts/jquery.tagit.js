@@ -184,12 +184,12 @@
             //alert(self._splitAt);
 
             //add the html input
-            this.element.html('<li class="tagit-new"><input class="tagit-input" type="text" /></li>');
+            this.element.html('<li class="tagit-new"><input class="tagit-input" type="text" placeholder="Add tag..." /></li>');
 
             this.input = this.element.find(".tagit-input");
 
             // disable the input if tagit is not enabled
-            if (!self.options.enabled) this.input.attr('disabled', 'disabled')
+            if (!self.options.enabled) this.input.attr('disabled', 'disabled').attr('placeholder', '');
 
             this.input.autoGrowInput();
             //setup click handler

@@ -35,8 +35,8 @@ namespace Dayspent.Web
                        "~/scripts/jquery.inputmask/jquery.inputmask.js",
                        "~/scripts/jquery.inputmask/jquery.inputmask.extensions.js",
                        "~/scripts/jquery.inputmask/jquery.inputmask.date.extensions.js",
-                       "~/scripts/jquery.inputmask/jquery.tagit.js"
-
+                       "~/scripts/jquery.textcomplete.js",
+                       "~/scripts/jquery.overlay.js"
                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -94,6 +94,7 @@ namespace Dayspent.Web
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/scripts/knockout-{version}.js",
                         "~/scripts/knockout.mapping-latest.js",
+                        "~/scripts/knockout-sortable.js",
                         "~/scripts/knockout.bindings.js",
                         "~/scripts/knockout.bindings.editor.js",
                         "~/scripts/knockout.bindings.dayspent.js",
@@ -115,6 +116,7 @@ namespace Dayspent.Web
 
             bundles.Add(new ScriptBundle("~/bundles/widgets").Include(
                         "~/scripts/widgets/appnavigationbar.js",
+                        "~/scripts/widgets/appsidebar.js",
                         "~/scripts/widgets/errordialog.js",
                         "~/scripts/widgets/timelinesidebar.js"
                         ));
@@ -125,6 +127,9 @@ namespace Dayspent.Web
                         "~/scripts/repositories/userprofilerepository.js",
                         "~/scripts/repositories/useravatarrepository.js",
                         "~/scripts/repositories/activitytagrepository.js",
+                        "~/scripts/repositories/statusreportrepository.js",
+                        "~/scripts/repositories/statusreportitemrepository.js",
+                        "~/scripts/repositories/statusreportitemtagrepository.js",
                         "~/scripts/repositories/tagrepository.js",
                         "~/scripts/viewmodels/activityviewmodel.js",
                         "~/scripts/viewmodels/timelineviewmodel.js",
@@ -132,9 +137,16 @@ namespace Dayspent.Web
                         "~/scripts/viewmodels/profileviewmodel.js",
                         "~/scripts/viewmodels/taggroupviewmodel.js",
                         "~/scripts/viewmodels/reportviewmodel.js",
+                        "~/scripts/viewmodels/myreportsviewmodel.js",
                         "~/scripts/viewmodels/dashboardviewmodel.js",
+                        "~/scripts/viewmodels/statusreportcategoryviewmodel.js",
+                        "~/scripts/viewmodels/statusreportviewmodel.js",
+                        "~/scripts/viewmodels/statusreportitemviewmodel.js",
+                        "~/scripts/widgets/addstatusreportitemtemplate.js",
                         "~/scripts/views/profile.js",
-                        "~/scripts/views/timeline.js"
+                        "~/scripts/views/timeline.js",
+                        "~/scripts/views/dashboard.js",
+                        "~/scripts/views/statusreport.js"
                          ));
 
 
@@ -148,6 +160,7 @@ namespace Dayspent.Web
                         "~/content/popmodal.css",
                         "~/content/tagit.css",
                         "~/content/jquery.timepicker.css",
+                        "~/content/jquery.textcomplete.css",
                         "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

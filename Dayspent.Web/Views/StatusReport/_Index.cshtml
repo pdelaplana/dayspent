@@ -1,0 +1,121 @@
+﻿@model Dayspent.Web.Models.MyReportsViewModel
+
+<div id="MyReports" class="grid fluid" style="margin-bottom:0">
+    <div class="row">
+        <div class="span3 border-right" style="" >
+            <div class="padding10 border-bottom">
+                <span class="">Available Reports</span>
+            </div>
+            <div id="StatusReportsList" class="listview padding20"  data-bind="foreach: sortedStatusReportsByDate">
+                <a href="" class="list bg-orange"  data-bind="css: { 'selected' : selected() }, click: $parent.selectStatusReport">
+                    <div class="list-content">
+                        <div class="fg-white">
+                            <div class="list-title" data-bind="text:moment(reportDate()).format('MMMM') +', '+moment(reportDate()).format('YYYY')"></div>
+                            <div class="fg-white" style="font-size:22pt" data-bind="text:moment(reportDate()).format('D')"></div>
+                            <div class="list-remark" data-bind="text:moment(reportDate()).format('dddd')"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>        
+        </div>
+        <div id="SelectedStatusReport" class="span9 no-padding">
+            <div class="push-down-20" data-bind="with: statusReports.selected" style="height:100%">
+                <h2 class="subheader" style="height:30px">
+                    Report for <span class="subheader" data-bind="text:moment(reportDate()).format('LL')"></span>
+                    <a href="" style="font-size:x-small" data-bind="popModalCalendar:reportDate, placement:'bottomRight', noClearButton: true, saveValue: save, visible:!submitted()">Change</a>
+                    <span class="text-muted place-right" style="font-size:small"><i class="icon-cog"></i> </span>
+                </h2>
+                <div style="overflow:auto;height:90%" >
+                    <div data-bind="foreach: reportCategories" class="border padding15" style="width:97%">
+                        <h3 class="subheader-secondary target" data-bind="text:description">Ongoing</h3>
+                        <div class="listview small">
+                            <div data-bind="sortable: { data: reportItems, connectClass:'target', allowDrop:true, afterMove: $parent.repositionItems, isEnabled:true, options:{ placeholder: ItemPlaceHolder, handle: '.grip' } }" style="min-height:5px">
+                                <div class="list ol-transparent no-border no-padding bg-white">
+                                    <div class="list-content border-bottom" style="cursor:default" data-bind="hover:{}">
+                                        <div style="padding-left:0px">
+                                            <i class="place-right icon-arrow-down-5 text-muted"></i>
+                                            <div data-bind="markdownToHtml:description"></div>
+                                            @*
+                                            <div class="tags-container clearfix" style="width:100%" data-bind="visible:tags().length > 0">
+                                                <ul class="tagit transparent" data-bind="tagit: tags, tagitOptions: { enabled: false, initialTags: tags(), sourceUrl: '/api/tags',addTag: addTag, removeTag: removeTag }"></ul>
+                                            </div>    
+                                            *@
+                                            <div class="item-links">
+                                                <a href="" class="text-muted" data-bind="editStatusReportItem: {}, tagitOptions: { initialTags: tags(), sourceUrl: '/api/tags', addTag: addTag, removeTag: removeTag }">edit</a>
+                                                <a href="" class="text-muted" data-bind="click: $parent.removeItem">delete</a>
+                                                <a href="" class="text-muted">share feedback</a>
+                                                <div class="place-right">
+                                                    <span class="cursor-pointer text-muted" data-bind="addTime:timeSpentFormatted, css:{ 'label bg-steel fg=white' : timeSpentInSecs == 0   }"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko if:  (reportItems().length == 0) && $parent.submitted()-->
+                            <div class="list no-border ol-transparent">
+                                <div class="list-content border-bottom">
+                                    <div class="">
+                                        <div class="text-muted " style="">
+                                            No <span data-bind="text:description"></span> reported.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <div class="list no-border ol-transparent">
+                                <div class="list-content border-bottom">
+                                    <div class="">
+                                        <div data-bind="addStatusReportItem: reportItems, params: { statusReportCategoryId: statusReportCategoryId(), statusReportId: $parent.statusReportId() }, tagitOptions: { initialTags:[], sourceUrl: '/api/tags' }" class="fg-grayLight bd-grayLighter cursor-pointer" style="min-height:30px;width:100%;">
+                                            <i class="icon-plus-2"></i>
+                                            Click here to add <span data-bind="text:description"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" push-down-30">
+                        <button class="large bg-green fg-white" data-bind="click:submit,visible:!submitted()">Submit</button>
+                        <button class="large bg-red fg-white" data-bind="click:remove">Delete</button>
+                    </div>
+                    <div class="push-down-40"></div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var model = @Html.Raw(JsonConvert.SerializeObject(Model, new JsonSerializerSettings()
+           {
+               ContractResolver = new Dayspent.Web.Application.Configuration.FilteredCamelCasePropertyNamesContractResolver
+               {
+                   AssembliesToInclude = 
+                    { 
+                        typeof (Startup).Assembly 
+                    }
+               }
+           }));
+</script>
+
+<script id="AddStatusReportItemTemplate" type="text/html">
+    <div class="AddStatusReportItemTemplate">
+        <div data-role="label" class=" fg-grayLight bd-grayLighter cursor-pointer">
+            <i class="icon-plus-2"></i>
+            Click here to add <span data-bind="text:category"></span>
+        </div>
+        <div data-role="form">
+            <div class="input-control textarea">
+                <textarea data-bind="val: description"></textarea>
+            </div>
+            <div class="tags-container" style="width:100%;display:inline-block" data-bind="">
+                <ul class="tagit transparent" data-bind="tagit: tags, tagitOptions: { enabled: true, initialTags: tags(), sourceUrl: '/api/tags' }"></ul>
+            </div>
+            <button class="button primary" data-bind="click:save">Save</button>
+            <button class="button link" data-bind="click:cancel">Cancel</button>
+        </div>
+    </div>
+    
+</script>
