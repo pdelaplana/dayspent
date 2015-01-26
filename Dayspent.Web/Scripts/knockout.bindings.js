@@ -105,10 +105,54 @@ ko.bindingHandlers.markdownToHtml = {
             observable = valueAccessor(),
             markdown = new MarkdownDeep.Markdown();
 
-        $(element).html(markdown.Transform(observable()).replace(/(^|\W)(#[a-z\d][\w-]*)/ig, '$1<span class="label bg-amber fg-white">$2</span>'));
+        $(element).html(markdown.Transform(observable()).replace(/(^|\W)(#[a-z\d][\w-]*)/ig, '$1<span class="link">$2</span>'));
         
     }
 }
+
+/**
+ * binding handler to show popModal dialog
+ * 
+ */
+ko.bindingHandlers.popModal = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var bindings = allBindings(),
+            value = ko.utils.unwrapObservable(valueAccessor()),
+            enabled = bindings.enabled || true,
+            options = $.extend({
+                html: '',
+                placement: 'bottomLeft',
+                showCloseBut: true,
+                onDocumentClickClose: false,
+                onOkBut: function () { },
+                onCancelBut: function () { },
+                onLoad: function () { },
+                onClose: function () {
+                    $(element).removeClass('popModalOpen');
+                }
+            }, bindings.popModalOptions);
+
+        if (enabled) {
+            $(element).click(function (event) {
+                if ($(this).hasClass('popModalOpen')) {
+                    $(this).removeClass('popModalOpen');
+                    $(this).popModal('hide');
+
+                } else {
+                    $(this).popModal(options);
+
+                    ko.applyBindings(bindingContext.$data, $(element).next('.popModal').get(0));
+                    $(this).addClass('popModalOpen');
+
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            })
+        }
+
+    }
+};
+
 
 /**
  * binding handler to show jquery calender inside a popModal dialog
@@ -154,10 +198,16 @@ ko.bindingHandlers.popModalCalendar = {
                                 bindings.saveValue(observable());
 
                         }
+
+                        $(element).removeClass('popModalOpen');
+                        $(element).popModal('hide');
+
                     }
                     //options.onSelect = funcOnSelectdate;
                     ko.utils.registerEventHandler(calendar, 'change', funcOnSelectdate);
                     ko.utils.registerEventHandler(clearBtn, 'click', funcOnClear);
+
+                    $(calendar).datepicker('setDate', moment(observable()).toDate());
 
                 },
                 onClose: function () {
@@ -179,6 +229,15 @@ ko.bindingHandlers.popModalCalendar = {
             event.stopPropagation();
 
         })
+
+    },
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var calendar = $(element).next('.popModal').find('.popModal_calendar'),
+            value = ko.utils.unwrapObservable(valueAccessor()),
+            current = calendar.datepicker('getDate');
+
+        $(calendar).datepicker('setDate', moment(value).toDate());
+
 
     }
 };
@@ -397,3 +456,49 @@ ko.bindingHandlers.autosize = {
         $(element).autosize();
     }
 }
+
+/**
+ * custom binding handler to activate metro ui dropdown
+ * 
+ */
+ko.bindingHandlers.dropdown = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        //$(element).next('ul[role=dropdown]').dropdown();
+        $(element).dropdown();
+    }
+}
+
+/**
+ * custom binding handler to activate metro ui progress bar
+ * 
+ */
+ko.bindingHandlers.progressbar = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var bindings = allBindings(),
+            value = ko.utils.unwrapObservable(valueAccessor());
+
+        $(element).progressbar({
+            value: value,
+            color: 'bg-green'
+        });
+    }
+}
+
+/**
+ * custom binding handler to splitText into labels
+ * 
+ */
+ko.bindingHandlers.splitText = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var bindings = allBindings(),
+            text = ko.utils.unwrapObservable(valueAccessor()),
+            result = '';
+            
+        $.each(text.split(','), function (index, value) {
+            result += '<span class="label bg-blue fg-white">'+value+'</span> '
+        })
+
+        $(element).html(result);
+    }
+}
+

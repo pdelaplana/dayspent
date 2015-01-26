@@ -52,6 +52,9 @@
 
     }
 
+    //
+    // chart data
+    //
     self.showMonthlyChart = function (data, event) {
 
     }

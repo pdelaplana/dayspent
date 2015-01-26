@@ -43,11 +43,29 @@ $(function () {
     app.user.userId = authenticatedUser.id;
     app.user.userName = authenticatedUser.userName;
     app.user.fullName = authenticatedUser.fullName;
+
+    // add parts
     app.ui.addPart('appNavigationBar', new AppNavigationBar()).bindTo('#AppNavigationBar');
     app.ui.addPart('appSideBar', new AppSideBar()).bindTo('#AppSideBar');
-
     app.ui.setWindowTitle('Home');
 
-    app.start('app/#/myreports');
+    app.start('app/#/dashboard');
 
 })
+
+app.utils = {
+    formatTime: function (timeSpentMins) {
+        function pad(str, max) {
+            str = str.toString();
+            return str.length < max ? pad("0" + str, max) : str;
+        }
+
+        if (timeSpentMins == null || timeSpentMins == 0)
+            return '0m';
+
+        var hour = Math.floor(timeSpentMins / 60);
+        var mins = timeSpentMins % 60;
+        return hour + "h " + pad(mins, 2) + "m ";
+    }
+
+}

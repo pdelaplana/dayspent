@@ -21,7 +21,8 @@ namespace Dayspent.Web.Application.Configuration.Automapper.Profiles
             Mapper.CreateMap<CommandResult<StatusReportItemTag>, WebApiResult<StatusReportItemTagViewModel>>();
 
             Mapper.CreateMap<StatusReportCategory, StatusReportCategoryViewModel>();
-            Mapper.CreateMap<StatusReport, StatusReportViewModel>();
+            Mapper.CreateMap<StatusReport, StatusReportViewModel>()
+                .ForMember(dest => dest.StatusReportItems, opts => opts.MapFrom(src => src.StatusReportItems.OrderBy(i => i.Sequence).ToList()));
             Mapper.CreateMap<StatusReportItem, StatusReportItemViewModel>()
                 .ForMember(dest => dest.ReportingUserFullName, opts => opts.ResolveUsing<CacheUserFullNameResolver>().FromMember(src => src.StatusReport.ReportingUserId))
                 .ForMember(dest => dest.ReportingUserId, opts => opts.MapFrom(src => src.StatusReport.ReportingUserId))

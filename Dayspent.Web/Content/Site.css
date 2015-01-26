@@ -1,6 +1,7 @@
 ﻿html, body {
     height:auto;
     overflow:hidden;
+    background-color:#f5f5f5;
 }
 
 input[type=text]{
@@ -205,6 +206,20 @@ div.datepicker .ui-datepicker {
     font-size:14px;   
 }
 
+/**************************************** 
+ *    #Dashboard styles
+ ****************************************/
+#Dashboard .header{
+    font-family: Arial, Helvetica, sans-serif;font-weight:800
+}
+
+#Dashboard .header i{
+    font-size:.5em
+}
+
+#Dashboard table tr * {
+    line-height:19pt;
+}
 
 /*
     placeholder styles
@@ -247,6 +262,10 @@ textarea.transparent, input[type=text].transparent{
 }
 
 textarea{
-    font-size:11pt;
-    
+    font-size:11pt;   
+}
+
+.no-arrow.dropdown-toggle:after {
+  content: ""!important;
+  
 }

@@ -23,6 +23,15 @@ ko.observableArray.fn.getArrayOfProperty = function (propertyName) {
 
 }
 
+ko.observableArray.fn.sum = function (propertyName) {
+    var total = 0;
+    ko.utils.arrayForEach(this(), function (item) {
+        total += ko.unwrap(item[propertyName])
+    })
+    return total;
+}
+
+
 ko.observableArray.fn.insert = function (item, index) {
     //this.splice(this().length - 1, 0, item);
     if (index == undefined) index = 0;

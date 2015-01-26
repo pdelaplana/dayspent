@@ -118,3 +118,7 @@
 /// <reference path="widgets/addstatusreportitemtemplate.js" />
 /// <reference path="jquery.textcomplete.js" />
 /// <reference path="jquery.overlay.min.js" />
+/// <reference path="views/statistics.js" />
+/// <reference path="viewmodels/dailyupdateviewmodel.js" />
+/// <reference path="viewmodels/usersummaryviewmodel.js" />
+/// <reference path="knockout.bindings.chartjs.js" />

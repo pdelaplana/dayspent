@@ -19,7 +19,7 @@ namespace Dayspent.Core.Repository.Commands
         {
             StatusReport statusReport = db.StatusReports.Create();
             statusReport.ReportingUserId = this.ReportingUserId;
-            statusReport.ReportDate = this.ReportDate;
+            statusReport.ReportDate = this.ReportDate.ToUniversalTime().Date;
             statusReport.SubmittedDate = this.SubmittedDate;
             db.StatusReports.Add(statusReport);
             db.SaveChanges();

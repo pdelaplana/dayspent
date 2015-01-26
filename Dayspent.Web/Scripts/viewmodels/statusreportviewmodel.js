@@ -28,6 +28,7 @@ function StatusReportViewModel(data) {
     // state 
     //
     self.selected = ko.observable(false);
+    self.view = ko.observable('report');
 
     //
     // computed variables
@@ -35,6 +36,7 @@ function StatusReportViewModel(data) {
     self.submitted = ko.computed(function () {
         return (self.submittedDate() != null)
     })
+
     self.itemsByCategories = ko.computed(function () {
         var reportCategories = [];
         $.each(app.reportCategories(), function (i, category) {
@@ -55,6 +57,45 @@ function StatusReportViewModel(data) {
         return reportCategories;
         
     })
+
+    self.tagGroups = ko.computed(function () {
+        self.reportItems();
+        var result = new Array,
+            tagGroups = ko.utils.arrayGetDistinctValues(self.reportItems.getArrayOfProperty('tagGroup')).sort();
+        $.each(tagGroups, function (i, tagGroup) {
+            var items = ko.utils.arrayFilter(self.reportItems(), function (item) {
+                return item.tagGroup() == tagGroup;
+            });
+            var totalTime = 0;
+            $.each(items, function (index, value) {
+                totalTime += value.timeSpentInSecs();
+            })
+            result.push(new TagGroup(tagGroup, totalTime));
+        })
+        return result;
+    })
+
+    //
+    // for charting
+    //
+    self.chartData = ko.computed(function () {
+        var timeSpentInSecs = self.reportItems.sum('timeSpentInSecs');
+        return [
+            {
+                value: timeSpentInSecs / 3600,
+                color: "#60a917",
+                highlight: "#60a917",
+                label: "Spent"
+            },
+            {
+                value: 8 - (timeSpentInSecs / 3600),
+                color: "#ccc",
+                highlight: "#ccc",
+                label: "Unspent"
+            }
+        ]
+    })
+
 
     //
     // operations
@@ -116,6 +157,11 @@ function StatusReportViewModel(data) {
 
     }
 
+    self.openCharts = function () {
+
+
+    }
+
     //
     // do init stuff here
     //
@@ -160,4 +206,10 @@ function ItemsGroup() {
             })
         }
     }
+}
+
+function TagGroup(name, totalTimeInSecs) {
+    var self = this;
+    self.name = name;
+    self.totalTimeInSecs = totalTimeInSecs;
 }

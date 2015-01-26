@@ -2,7 +2,7 @@
     var self = this;
 
     self.reportCategories = ko.observableArray([]);
-    app.reportCategories = self.reportCategories;
+    app.reportCategories = self.reportCategories; // attach to app object to make it global
 
     self.statusReports = ko.observableArray([]);
     self.statusReports.selected = ko.computed(function () {
@@ -22,6 +22,12 @@
         })
     })
     app.statusReports = self.statusReports;
+
+
+
+    //
+    // do init stuff here
+    //
 
     // populate reportCategories observable array and attach to app object
     $.each(data.reportCategories, function (index, category) {

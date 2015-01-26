@@ -177,11 +177,13 @@ nav.horizontal-menu a.big {
     text-align:left;
     color:rgba(0,0,0,0.3);
     font-weight:400;
+    border-bottom:none!important;
 }
 
 .metro table thead tr td
 {
     font-size:88%;
+    border-bottom:none;
 }
 
 /*********************************** 

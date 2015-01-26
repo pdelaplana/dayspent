@@ -47,7 +47,7 @@ namespace Dayspent.Web.API
 
             // and create new status report
             var result = this._repository.ExecuteCommand(new CreateStatusReportCommand{
-                ReportDate = DateTime.UtcNow,
+                ReportDate = DateTime.UtcNow.Date,
                 ReportingUserId = User.Identity.GetUserId()
             });
             return AutoMapper.Mapper.Map<CommandResult<StatusReport>, WebApiResult<StatusReportViewModel>>(result);

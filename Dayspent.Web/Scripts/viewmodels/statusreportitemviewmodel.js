@@ -22,7 +22,7 @@
     self.tags.enabled = ko.observable(false);
 
     //
-    //
+    // computed observables
     //
     self.timeSpentFormatted = ko.computed(function () {
 
@@ -38,6 +38,15 @@
         var mins = timeSpentMins % 60;
         return hour + "h " + pad(mins, 2) + "m ";
 
+    })
+
+    self.tagGroup = ko.computed(function () {
+        var result = "";
+        $.each(self.tags(), function (index,tag) {
+            if (result != "") result+=", ";
+            result += tag;
+        });
+        return result == '' ? 'Untagged': result;;
     })
 
     //

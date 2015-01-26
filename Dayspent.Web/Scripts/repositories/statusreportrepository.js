@@ -22,7 +22,7 @@
             type: 'put',
             data: {
                 StatusReportId: self.statusReportId,
-                ReportDate: self.reportDate.toJSON()
+                ReportDate: moment(self.reportDate).utc().toJSON()
             }
         });
     }

@@ -98,6 +98,7 @@ namespace Dayspent.Web
                         "~/scripts/knockout.bindings.js",
                         "~/scripts/knockout.bindings.editor.js",
                         "~/scripts/knockout.bindings.dayspent.js",
+                        "~/scripts/knockout.bindings.chartjs.js",
                         "~/scripts/knockout.functions.js"
                         ));
 
@@ -139,6 +140,8 @@ namespace Dayspent.Web
                         "~/scripts/viewmodels/reportviewmodel.js",
                         "~/scripts/viewmodels/myreportsviewmodel.js",
                         "~/scripts/viewmodels/dashboardviewmodel.js",
+                        "~/scripts/viewmodels/dailyupdateviewmodel.js",
+                        "~/scripts/viewmodels/usersummaryviewmodel.js",
                         "~/scripts/viewmodels/statusreportcategoryviewmodel.js",
                         "~/scripts/viewmodels/statusreportviewmodel.js",
                         "~/scripts/viewmodels/statusreportitemviewmodel.js",
@@ -146,7 +149,9 @@ namespace Dayspent.Web
                         "~/scripts/views/profile.js",
                         "~/scripts/views/timeline.js",
                         "~/scripts/views/dashboard.js",
+                        "~/scripts/views/statistics.js",
                         "~/scripts/views/statusreport.js"
+
                          ));
 
 

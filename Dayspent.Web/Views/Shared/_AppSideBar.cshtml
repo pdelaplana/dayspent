@@ -1,19 +1,34 @@
 ﻿<nav id="AppSidebar" class="sidebar dark" style="overflow-y:auto;overflow-x:hidden">
     <ul>
-        <li data-bind="css: { 'stick bg-red' : selected() == 'dashboard' }"><a href="/#/dashboard" >Dashboard</a></li>
-        <li data-bind="css: {'stick bg-red': selected() == 'myreports'}"><a href="/#/myreports" >My Reports</a></li>
+        <li data-bind="css: { 'stick bg-red' : selected() == 'dashboard' }"><a href="#/dashboard" >Dashboard</a></li>
+        <li data-bind="css: {'stick bg-red': selected() == 'myreports'}"><a href="#/myreports" >My Reports</a></li>
         
         <li class="" data-bind="">
-            <a href="" class="dropdown-toggle">Group Reports</a>
+            <a href="" class="dropdown-toggle">Groups</a>
             <ul class="dropdown-menu keep-open" data-role="dropdown">
                 <li><a href="">All</a></li>
-                <li><a href="">Development</a></li>
+                <li><a href="">Development Team</a></li>
                 <li><a href="">Marketing</a></li>
+                <li><a href="">Accounts</a></li>
+                <li><a href="">Help Desk</a></li>
                 <li class="divider"></li>
                 <li><a href="">New Group...</a></li>
             </ul>
         </li>
 
+        <li class="" data-bind="">
+            <a href="" class="dropdown-toggle">People</a>
+            <ul class="dropdown-menu keep-open" data-role="dropdown">
+                <li><a href="">All</a></li>
+                <li><a href="">Development Team</a></li>
+                <li><a href="">Marketing</a></li>
+                <li><a href="">Accounts</a></li>
+                <li><a href="">Help Desk</a></li>
+                <li class="divider"></li>
+                <li><a href="">New Group...</a></li>
+            </ul>
+        </li>
+        <li data-bind="css: { 'stick bg-red' : selected() == 'statistics' }"><a href="#/statistics">Search</a></li>
         <li><a href="">Settings</a></li>
 
 

@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace Dayspent.Core.Models
 {
+
+    public static class StatusReportCategoryCodes
+    {
+        public const string InProgess = "ONGOING";
+        public const string Completed = "COMPLETED";
+        public const string NotStarted = "UPCOMING";
+        public const string Impediment = "IMPEDIMENT";
+    }
+
     public class StatusReportCategory : Auditable
     {
         [Key]

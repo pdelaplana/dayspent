@@ -348,3 +348,4 @@ ko.bindingHandlers.addStatusReportItemTemplate = {
 
     }
 };
+

@@ -111,6 +111,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -209,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ActivityController.cs" />
+    <Compile Include="API\DashboardController.cs" />
     <Compile Include="API\StatusReportItemTagController.cs" />
     <Compile Include="API\ActivityTagController.cs" />
     <Compile Include="API\AvatarController.cs" />
@@ -250,12 +252,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StatusReportController.cs" />
     <Compile Include="Controllers\TimelineController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DailyUpdateViewModel.cs" />
     <Compile Include="Models\StatusReportItemTagViewModel.cs" />
     <Compile Include="Models\ActivityTagViewModel.cs" />
     <Compile Include="Models\ActivityViewModel.cs" />
@@ -467,6 +471,7 @@
     <Content Include="Scripts\sammy-0.7.5.min.js" />
     <Content Include="Scripts\viewmodels\activityviewmodel.js" />
     <Content Include="Scripts\viewmodels\createactivityviewmodel.js" />
+    <Content Include="Scripts\viewmodels\dailyupdateviewmodel.js" />
     <Content Include="Scripts\viewmodels\dashboardviewmodel.js" />
     <Content Include="Scripts\viewmodels\myreportsviewmodel.js" />
     <Content Include="Scripts\viewmodels\profileviewmodel.js" />
@@ -476,6 +481,8 @@
     <Content Include="Scripts\viewmodels\statusreportviewmodel.js" />
     <Content Include="Scripts\viewmodels\taggroupviewmodel.js" />
     <Content Include="Scripts\viewmodels\timelineviewmodel.js" />
+    <Content Include="Scripts\viewmodels\usersummaryviewmodel.js" />
+    <Content Include="Scripts\views\statistics.js" />
     <Content Include="Scripts\views\dashboard.js" />
     <Content Include="Scripts\views\profile.js" />
     <Content Include="Scripts\views\statusreport.js" />
@@ -558,6 +565,8 @@
     <Content Include="Views\Dashboard\_Index.cshtml" />
     <Content Include="Views\Shared\_AppSideBar.cshtml" />
     <Content Include="Views\StatusReport\_Index.cshtml" />
+    <Content Include="Views\Statistics\_Index.cshtml" />
+    <Content Include="Scripts\knockout.bindings.chartjs.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

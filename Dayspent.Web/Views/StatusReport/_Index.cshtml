@@ -3,87 +3,63 @@
 <div id="MyReports" class="grid fluid" style="margin-bottom:0">
     <div class="row">
         <div class="span3 border-right" style="" >
-            <div class="padding10 border-bottom">
-                <span class="">Available Reports</span>
+            <div class="border-bottom">
+                <nav class="horizontal-menu">
+                    <ul>
+                        <li><a href="" class="dropdown-toggle">This Week</a>
+                            <ul class="dropdown-menu" data-role="dropdown">
+                                <li><a href="">This Week</a></li>
+                                <li><a href="">Last Week</a></li>
+                                <li><a href="">This Month</a></li>
+                                <li><a href="">Last Month</a></li>
+                                <li><a href="">This Year</a></li>
+                                <li><a href="">All Time</a></li>
+                                <li class="divider"></li>
+                                <li><a href="">Group by Week</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div id="StatusReportsList" class="listview padding20"  data-bind="foreach: sortedStatusReportsByDate">
-                <a href="" class="list bg-orange"  data-bind="css: { 'selected' : selected() }, click: $parent.selectStatusReport">
+            <div id="StatusReportsList" class="listview padding10" data-bind="foreach: sortedStatusReportsByDate">
+                <a href="" class="list bg-orange" data-bind="css: { 'selected' : selected() }, click: $parent.selectStatusReport">
                     <div class="list-content">
                         <div class="fg-white">
-                            <div class="list-title" data-bind="text:moment(reportDate()).format('MMMM') +', '+moment(reportDate()).format('YYYY')"></div>
-                            <div class="fg-white" style="font-size:22pt" data-bind="text:moment(reportDate()).format('D')"></div>
-                            <div class="list-remark" data-bind="text:moment(reportDate()).format('dddd')"></div>
+                            <div class="list-title" data-bind="text:moment.utc(reportDate()).local().format('MMMM') +', '+moment.utc(reportDate()).local().format('YYYY')"></div>
+                            <div class="fg-white" style="font-size:22pt" data-bind="text:moment.utc(reportDate()).local().format('D')"></div>
+                            <div class="list-remark" data-bind="text:moment.utc(reportDate()).local().format('dddd')"></div>
                         </div>
                     </div>
                 </a>
             </div>        
         </div>
-        <div id="SelectedStatusReport" class="span9 no-padding">
+        <div id="SelectedStatusReport" class="span9 no-padding" >
             <div class="push-down-20" data-bind="with: statusReports.selected" style="height:100%">
-                <h2 class="subheader" style="height:30px">
-                    Report for <span class="subheader" data-bind="text:moment(reportDate()).format('LL')"></span>
-                    <a href="" style="font-size:x-small" data-bind="popModalCalendar:reportDate, placement:'bottomRight', noClearButton: true, saveValue: save, visible:!submitted()">Change</a>
-                    <span class="text-muted place-right" style="font-size:small"><i class="icon-cog"></i> </span>
-                </h2>
-                <div style="overflow:auto;height:90%" >
-                    <div data-bind="foreach: reportCategories" class="border padding15" style="width:97%">
-                        <h3 class="subheader-secondary target" data-bind="text:description">Ongoing</h3>
-                        <div class="listview small">
-                            <div data-bind="sortable: { data: reportItems, connectClass:'target', allowDrop:true, afterMove: $parent.repositionItems, isEnabled:true, options:{ placeholder: ItemPlaceHolder, handle: '.grip' } }" style="min-height:5px">
-                                <div class="list ol-transparent no-border no-padding bg-white">
-                                    <div class="list-content border-bottom" style="cursor:default" data-bind="hover:{}">
-                                        <div style="padding-left:0px">
-                                            <i class="place-right icon-arrow-down-5 text-muted"></i>
-                                            <div data-bind="markdownToHtml:description"></div>
-                                            @*
-                                            <div class="tags-container clearfix" style="width:100%" data-bind="visible:tags().length > 0">
-                                                <ul class="tagit transparent" data-bind="tagit: tags, tagitOptions: { enabled: false, initialTags: tags(), sourceUrl: '/api/tags',addTag: addTag, removeTag: removeTag }"></ul>
-                                            </div>    
-                                            *@
-                                            <div class="item-links">
-                                                <a href="" class="text-muted" data-bind="editStatusReportItem: {}, tagitOptions: { initialTags: tags(), sourceUrl: '/api/tags', addTag: addTag, removeTag: removeTag }">edit</a>
-                                                <a href="" class="text-muted" data-bind="click: $parent.removeItem">delete</a>
-                                                <a href="" class="text-muted">share feedback</a>
-                                                <div class="place-right">
-                                                    <span class="cursor-pointer text-muted" data-bind="addTime:timeSpentFormatted, css:{ 'label bg-steel fg=white' : timeSpentInSecs == 0   }"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="pos-rel block clearfix">
+                    <h2 class="subheader place-left ntp ntm" style="height:35px">
+                        Report for <span class="subheader" data-bind="text:moment.utc(reportDate()).local().format('LL')"></span>
+                        <a href="" style="font-size:x-small" data-bind="popModalCalendar:reportDate, placement:'bottomRight', noClearButton: true, saveValue: save, visible:true">Change</a>
+                    </h2>
+                    
+                </div>
+
+                <div style="overflow:auto;height:90%" class="">
+                    <div class="grid fluid">
+                        <div class="row">
+                            <div class="span9">
+                                <div data-bind="template:{ name :'ReportItemsTemplate', data: $data}"></div>
                             </div>
-                            <!-- ko if:  (reportItems().length == 0) && $parent.submitted()-->
-                            <div class="list no-border ol-transparent">
-                                <div class="list-content border-bottom">
-                                    <div class="">
-                                        <div class="text-muted " style="">
-                                            No <span data-bind="text:description"></span> reported.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /ko -->
-                            <div class="list no-border ol-transparent">
-                                <div class="list-content border-bottom">
-                                    <div class="">
-                                        <div data-bind="addStatusReportItem: reportItems, params: { statusReportCategoryId: statusReportCategoryId(), statusReportId: $parent.statusReportId() }, tagitOptions: { initialTags:[], sourceUrl: '/api/tags' }" class="fg-grayLight bd-grayLighter cursor-pointer" style="min-height:30px;width:100%;">
-                                            <i class="icon-plus-2"></i>
-                                            Click here to add <span data-bind="text:description"></span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="span3">
+                                <div data-bind="template:{ name :'ReportChartTemplate', data: $data}"></div>
                             </div>
                         </div>
 
                     </div>
-                    <div class=" push-down-30">
-                        <button class="large bg-green fg-white" data-bind="click:submit,visible:!submitted()">Submit</button>
-                        <button class="large bg-red fg-white" data-bind="click:remove">Delete</button>
-                    </div>
-                    <div class="push-down-40"></div>
+
+                    
                 </div>
-               
-            </div>
+
+            </div>        
         </div>
     </div>
 </div>
@@ -119,3 +95,95 @@
     </div>
     
 </script>
+
+<script id="ReportItemsTemplate" type="text/html">
+    <div data-bind="foreach: reportCategories" class="border padding15 bg-white" style="width:100%">
+        <h3 class="subheader-secondary target" data-bind="text:description">Ongoing</h3>
+        <div class="listview small">
+            <div data-bind="sortable: { data: reportItems, connectClass:'target', allowDrop:true, afterMove: $parent.repositionItems, isEnabled:true, options:{ placeholder: ItemPlaceHolder, handle: '.grip' } }" style="min-height:5px">
+                <div class="list ol-transparent no-border no-padding bg-white">
+                    <div class="list-content border-bottom" style="cursor:default" data-bind="hover:{}">
+                        <div style="padding-left:0px">
+                            <div class="button-dropdown place-right">
+                                <i class="icon-arrow-down-5 cursor-pointer text-muted no-arrow dropdown-toggle "></i>
+                                <ul class="dropdown-menu place-right" data-role="dropdown" style="display:none" data-bind="dropdown:null">
+                                    <li><a href="#">Start Timer</a></li>
+                                    <li><a href="#">Add 30 minutes</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Delete</a></li>
+                                </ul>
+                            </div> 
+                            <div data-bind="markdownToHtml:description"></div>
+                            @*
+                                <div class="tags-container clearfix" style="width:100%" data-bind="visible:tags().length > 0">
+                                    <ul class="tagit transparent" data-bind="tagit: tags, tagitOptions: { enabled: false, initialTags: tags(), sourceUrl: '/api/tags',addTag: addTag, removeTag: removeTag }"></ul>
+                                </div>
+                            *@
+                            <div class="item-links">
+                                <a href="" class="text-muted" data-bind="editStatusReportItem: {}, tagitOptions: { initialTags: tags(), sourceUrl: '/api/tags', addTag: addTag, removeTag: removeTag }">edit</a>
+                                <a href="" class="text-muted" data-bind="click: $parent.removeItem">delete</a>
+                                <a href="" class="text-muted">share feedback</a>
+                                <div class="place-right">
+                                    <span class="cursor-pointer text-muted" data-bind="addTime:timeSpentFormatted, css:{ 'label bg-steel fg=white' : timeSpentInSecs == 0   }"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ko if:  (reportItems().length == 0) && $parent.submitted()-->
+            <div class="list no-border ol-transparent">
+                <div class="list-content border-bottom">
+                    <div class="">
+                        <div class="text-muted " style="">
+                            No <span data-bind="text:description"></span> reported.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="list no-border ol-transparent">
+                <div class="list-content border-bottom">
+                    <div class="">
+                        <div data-bind="addStatusReportItem: reportItems, params: { statusReportCategoryId: statusReportCategoryId(), statusReportId: $parent.statusReportId() }, tagitOptions: { initialTags:[], sourceUrl: '/api/tags' }" class="fg-grayLight bd-grayLighter cursor-pointer" style="min-height:30px;width:100%;">
+                            <i class="icon-plus-2"></i>
+                            Click here to add <span data-bind="text:description"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class=" push-down-30">
+        <button class="large bg-green fg-white" data-bind="click:submit,visible:!submitted()">Submit</button>
+        <button class="large bg-red fg-white" data-bind="click:remove">Delete</button>
+    </div>
+    <div class="push-down-40"></div>
+
+</script>
+
+<script id="ReportChartTemplate" type="text/html">
+    <div data-bind="" class="bg-white padding15 border" style="width:90%">
+        <h2 class="subheader-secondary">Time Spent</h2>
+        <div class="block pos-rel text-center">
+            <canvas class="pos-rel inline-block" width="120" height="120" data-bind="doughnutChart:chartData(), displayText:app.utils.formatTime(reportItems.sum('timeSpentInSecs') / 60)"></canvas>
+        </div>
+        <div>
+            <span class="push-down-40 block border-bottom text-muted">Time Spent by Tags</span>
+            <table class="table">
+                <tbody data-bind="foreach: tagGroups">
+                    <tr>
+                        <td>
+                            <div data-bind="splitText:name"></div>
+                            <div class="progress-bar push-down-10" data-bind="progressbar:(totalTimeInSecs/(8*3600))*100"></div>
+                            <span data-bind="text:app.utils.formatTime(totalTimeInSecs/60)"></span>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>        
+    </div>
+</script>
+

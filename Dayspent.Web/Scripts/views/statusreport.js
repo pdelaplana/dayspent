@@ -2,7 +2,7 @@
 
     // register route
     app.router.registerRoute('#/myreports', function (context) {
-        context.loadLocation('/statusreport/', initialize);
+        context.loadLocation('/statusreport', initialize);
 
     });
 
@@ -23,6 +23,7 @@
         })
         $(window).resize();
 
+        $('[data-role=dropdown]').dropdown();
     }
 
 }());
