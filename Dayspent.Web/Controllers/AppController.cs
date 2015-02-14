@@ -40,7 +40,7 @@ namespace Dayspent.Web.Controllers
             var applicationUser = _userCache.Get(User.Identity.GetUserId());
 
             // set viewbag and cookie for frontend use
-            ViewBag.AuthenticatedUser = AutoMapper.Mapper.Map<ApplicationUser, AuthenticatedUser>(_userCache.Get(User.Identity.GetUserId()) as ApplicationUser);
+            ViewBag.AuthenticatedUser = AutoMapper.Mapper.Map<ApplicationUser, AuthenticatedUser>(applicationUser);
             HttpCookie cookie = new HttpCookie("AuthenticatedUser");
             cookie.Value = JsonConvert.SerializeObject(ViewBag.AuthenticatedUser, new JsonSerializerSettings() { ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() });
             this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);

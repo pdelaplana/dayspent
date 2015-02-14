@@ -109,6 +109,7 @@ namespace Dayspent.Web
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/scripts/commons.js",
                         "~/scripts/app/router.js",
+                        "~/scripts/app/cache.js",
                         "~/scripts/app/ui.js",
                         "~/scripts/app/app.js",
                         "~/scripts/app/main.js"
@@ -119,7 +120,8 @@ namespace Dayspent.Web
                         "~/scripts/widgets/appnavigationbar.js",
                         "~/scripts/widgets/appsidebar.js",
                         "~/scripts/widgets/errordialog.js",
-                        "~/scripts/widgets/timelinesidebar.js"
+                        "~/scripts/widgets/timelinesidebar.js",
+                        "~/scripts/widgets/timerdialog.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/views").Include(
@@ -131,6 +133,7 @@ namespace Dayspent.Web
                         "~/scripts/repositories/statusreportrepository.js",
                         "~/scripts/repositories/statusreportitemrepository.js",
                         "~/scripts/repositories/statusreportitemtagrepository.js",
+                        "~/scripts/repositories/reportinggrouprepository.js",
                         "~/scripts/repositories/tagrepository.js",
                         "~/scripts/viewmodels/activityviewmodel.js",
                         "~/scripts/viewmodels/timelineviewmodel.js",
@@ -139,19 +142,23 @@ namespace Dayspent.Web
                         "~/scripts/viewmodels/taggroupviewmodel.js",
                         "~/scripts/viewmodels/reportviewmodel.js",
                         "~/scripts/viewmodels/myreportsviewmodel.js",
+                        "~/scripts/viewmodels/groupreportsviewmodel.js",
                         "~/scripts/viewmodels/dashboardviewmodel.js",
                         "~/scripts/viewmodels/dailyupdateviewmodel.js",
+                        "~/scripts/viewmodels/tagsummaryviewmodel.js",
                         "~/scripts/viewmodels/usersummaryviewmodel.js",
                         "~/scripts/viewmodels/statusreportcategoryviewmodel.js",
                         "~/scripts/viewmodels/statusreportviewmodel.js",
                         "~/scripts/viewmodels/statusreportitemviewmodel.js",
+                        "~/scripts/viewmodels/reportinggroupviewmodel.js",
+
                         "~/scripts/widgets/addstatusreportitemtemplate.js",
                         "~/scripts/views/profile.js",
                         "~/scripts/views/timeline.js",
                         "~/scripts/views/dashboard.js",
                         "~/scripts/views/statistics.js",
-                        "~/scripts/views/statusreport.js"
-
+                        "~/scripts/views/statusreport.js",
+                        "~/scripts/views/group.js"
                          ));
 
 

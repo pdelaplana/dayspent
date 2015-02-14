@@ -31,5 +31,15 @@ namespace Dayspent.Web.Controllers
             
             return PartialView("_index");
         }
+
+        public ActionResult Overview()
+        {
+            return PartialView("_overview");
+        }
+
+        public ActionResult Tags()
+        {
+            return PartialView("_tags");
+        }
     }
 }

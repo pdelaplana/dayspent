@@ -98,5 +98,7 @@ namespace Dayspent.Core.Models
         public DbSet<StatusReportCategory> StatusReportCategories { get; set; }
 
         public DbSet<ReportingGroup> ReportingGroups { get; set; }
+
+        public DbSet<Trackable> Trackables { get; set; }
     }
 }

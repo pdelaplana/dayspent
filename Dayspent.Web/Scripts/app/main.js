@@ -44,6 +44,16 @@ $(function () {
     app.user.userName = authenticatedUser.userName;
     app.user.fullName = authenticatedUser.fullName;
 
+    // resize certain parts of the UI automatically
+    $(window).resize(function () {
+
+        $('[data-role=resize]')
+            .css('overflow', 'auto')
+            .css('height', '90%')
+            .height($(window).height() - 100);
+
+    })
+
     // add parts
     app.ui.addPart('appNavigationBar', new AppNavigationBar()).bindTo('#AppNavigationBar');
     app.ui.addPart('appSideBar', new AppSideBar()).bindTo('#AppSideBar');
@@ -54,17 +64,17 @@ $(function () {
 })
 
 app.utils = {
-    formatTime: function (timeSpentMins) {
+    formatTime: function (timeSpentSecs) {
         function pad(str, max) {
             str = str.toString();
             return str.length < max ? pad("0" + str, max) : str;
         }
 
-        if (timeSpentMins == null || timeSpentMins == 0)
+        if (timeSpentSecs == null || timeSpentSecs == 0)
             return '0m';
 
-        var hour = Math.floor(timeSpentMins / 60);
-        var mins = timeSpentMins % 60;
+        var hour = Math.floor(Math.floor(timeSpentSecs/60) / 60);
+        var mins = Math.floor(timeSpentSecs/60) % 60;
         return hour + "h " + pad(mins, 2) + "m ";
     }
 

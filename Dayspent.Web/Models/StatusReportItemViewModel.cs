@@ -10,6 +10,8 @@ namespace Dayspent.Web.Models
         public int StatusReportItemId { get; set; }
         public int StatusReportId { get; set; }
 
+        public DateTime ReportDate { get; set; }
+
         public string ReportingUserId { get; set; }
         public string ReportingUserFullName { get; set; }
 

@@ -5,7 +5,7 @@
 function StatusReportItemEditingForm() {
     // compose the editing area
     var textarea = $('<textarea/>').attr('style', 'min-height:50px;height:50px').addClass(''),
-        text = $('<input/>').attr('type', 'text').attr('placeholder', 'Link to a task or activity....').width('80%').addClass('inline-block'),
+        text = $('<input/>').attr('type', 'text').attr('placeholder', 'Link to a task or activity....').addClass('inline-block'),
         inputControl = $('<div/>').addClass('input-control textarea').append(textarea),
         inputControlText = $('<div/>').addClass('input-control text').append(text),
         //tagit = $('<ul/>').addClass('tagit transparent inline-block').width('400px'),
@@ -13,9 +13,9 @@ function StatusReportItemEditingForm() {
         saveButton = $('<button>Save</button>').addClass('primary'),
         cancelButton = $('<button>Cancel</button>').addClass('link'),
         footerContainer = $('<div/>').addClass('bg-grayLighter padding10').append(saveButton).append(cancelButton),
-        //inputControlContainer = $('<div/>').addClass('border padding10').append(inputControl).append(tagitContainer).append(footerContainer);
-        inputControlContainer = $('<div/>').addClass('border padding10').append(inputControl).append(footerContainer);
-   
+        inputControlContainer = $('<div/>').addClass('').append(inputControlText).append(inputControl).append(footerContainer);
+        //inputControlContainer = $('<div/>').addClass('').append(inputControl).append(footerContainer);
+
     var self = this;
 
     self.textArea = textarea;
@@ -149,6 +149,7 @@ ko.bindingHandlers.addStatusReportItem = {
         var form = new StatusReportItemEditingForm();
 
         form.onSave = function () {
+            if (form.textArea.val().length == 0) return;
             var repository = new StatusReportItemRepository();
             repository.statusReportId = params.statusReportId;
             repository.statusReportCategoryId = params.statusReportCategoryId;
@@ -157,6 +158,7 @@ ko.bindingHandlers.addStatusReportItem = {
             repository.create().success(function (result) {
                 var item = new StatusReportItemViewModel(result.data)
                 collection.push(item);
+                viewModel.parent.reportItems.push(item);
                 form.hide();
                 form.textArea.val('');
                 $(element).show();
@@ -194,7 +196,7 @@ ko.bindingHandlers.editStatusReportItem = {
             newValueAccessor = function () { return viewModel.tags; }
 
         // get the content area
-        var contentArea = $(element).parent('div').parent('div');
+        var contentArea = $(element).parents('div.content-area');
 
         var form = new StatusReportItemEditingForm();
         form.onSave = function () {
@@ -349,3 +351,59 @@ ko.bindingHandlers.addStatusReportItemTemplate = {
     }
 };
 
+/**
+ * binding handler to open a modal timer
+ * 
+ */
+ko.bindingHandlers.modalTimer = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var timer = $('#Timer'),
+            observable = valueAccessor();
+            
+        $(element).click(function (event) {
+            $.blockUI({ message: timer.html() });
+            ko.applyBindings(new TimerDialog(viewModel), $('.blockUI div').get(0));
+            event.preventDefault();
+        })
+
+    }
+};
+
+/**
+ * binding handler to open a modal timer
+ * 
+ */
+ko.bindingHandlers.linkToProject = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        // get the content area
+        var contentArea = $(element).parent('div');
+
+        // build the editing area
+        var textbox = $('<input type="text" style="width:200px"/>'),
+            contentLink = $(element);
+
+        $(element).click(function (event) {
+
+            $(element).hide();
+            $(element).after(textbox);
+            textbox.val('').focus() // hook up event handlers
+                .keypress(function (event) {
+                    if (event.which == 13) {
+                        saveFn();
+                    }
+
+                });
+            event.preventDefault();
+
+        })
+        $(document).mouseup(function (e) {
+            if (!textbox.is(e.target) // if the target of the click isn't the container...
+                && textbox.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                textbox.remove();
+                $(element).show();
+            }
+        });
+
+    }
+};

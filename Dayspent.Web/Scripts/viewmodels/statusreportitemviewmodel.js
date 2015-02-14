@@ -4,6 +4,8 @@
     self.statusReportItemId = ko.observable(data.statusReportItemId);
     self.statusReportId = ko.observable(data.statusReportId);
 
+    self.reportDate = ko.observable(data.reportDate);
+
     self.reportingUserId = ko.observable(data.reportingUserId);
     self.reportingUserFullName = ko.observable(data.reportingUserFullName);
 
@@ -31,9 +33,9 @@
             return str.length < max ? pad("0" + str, max) : str;
         }
 
-        if (self.timeSpentInSecs() == null || self.timeSpentInSecs() == 0)
+        if (self.timeSpentInSecs() == null || self.timeSpentInSecs() < 60)
             return 'add time';
-        var timeSpentMins = self.timeSpentInSecs() / 60;
+        var timeSpentMins = Math.floor(self.timeSpentInSecs() / 60);
         var hour = Math.floor(timeSpentMins / 60);
         var mins = timeSpentMins % 60;
         return hour + "h " + pad(mins, 2) + "m ";
@@ -42,11 +44,15 @@
 
     self.tagGroup = ko.computed(function () {
         var result = "";
-        $.each(self.tags(), function (index,tag) {
+        $.each(self.tags().sort(), function (index,tag) {
             if (result != "") result+=", ";
             result += tag;
         });
-        return result == '' ? 'Untagged': result;;
+        return result == '' ? 'untagged': result;;
+    })
+
+    self.reportingUserShortName = ko.computed(function () {
+        return self.reportingUserFullName().split(' ')[0];
     })
 
     //
@@ -63,6 +69,19 @@
         var repository = new StatusReportItemRepository();
         repository.statusReportItemId = self.statusReportItemId();
         return repository.remove();
+    }
+
+    self.incrementTimeSpent = function (item, event) {
+        var incrementBy = $(event.target).data('param'),
+            repository = new StatusReportItemRepository();
+
+        if (incrementBy == null) incrementBy = 15;
+
+        repository.statusReportItemId = self.statusReportItemId();
+        repository.timeSpent = '+' + incrementBy;
+        return repository.addTimeSpent().success(function (result) {
+            self.timeSpentInSecs(result.data.timeSpentInSecs);
+        });
     }
 
     self.addTimeSpent = function () {
@@ -91,6 +110,7 @@
             self.tags.remove(result.data.tagName);
         })
     }
+
 
 
 }

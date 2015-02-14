@@ -27,5 +27,9 @@ namespace Dayspent.Core.Repository
 
         IQueryable<StatusReportCategory> StatusReportCategories { get; }
 
+        IQueryable<ReportingGroup> ReportingGroups { get; }
+
+        IQueryable<Trackable> Trackables { get; }
+
     }
 }

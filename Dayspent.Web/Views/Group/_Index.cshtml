@@ -1,0 +1,91 @@
+﻿@model Dayspent.Web.Models.GroupReportsViewModel
+
+<div id="GroupReports">
+    <div class="place-left border-right pos-abs" style="width:200px">
+        <div class="border-bottom">
+            <nav class="horizontal-menu">
+                <ul>
+                    <li>
+                        <a href="" class="dropdown-toggle">This Week</a>
+                        <ul class="dropdown-menu" data-role="dropdown">
+                            <li><a href="">This Week</a></li>
+                            <li><a href="">Last Week</a></li>
+                            <li><a href="">This Month</a></li>
+                            <li><a href="">Last Month</a></li>
+                            <li><a href="">This Year</a></li>
+                            <li><a href="">All Time</a></li>
+                            <li class="divider"></li>
+                            <li><a href="">Group by Week</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="no-padding no-margin" data-bind="resize:{}">
+            <div id="GroupReportsList" class="listview padding10" data-bind="foreach: reportItems.byDate">
+                <a href="" class="list bg-white border pos-rel " data-bind="click: function(){ $parent.dateSelected($data) }">
+                    <div class="list-content">
+                        <div class="fg-dark pos-rel place-left">
+                            <div class="list-title" data-bind="text:moment.utc($data).local().format('MMMM') +', '+moment.utc($data).local().format('YYYY')"></div>
+                            <div class="fg-dark" style="font-size:22pt" data-bind="text:moment.utc($data).local().format('D')"></div>
+                            <div class="list-title" data-bind="text:moment.utc($data).local().format('dddd')"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div id="SelectedDate" class="place-left no-padding no-margin" style="width:100%;padding-left:220px!important;height:100%">
+        <div class="push-down-20 nbp ntp">
+            <div class="pos-rel block clearfix">
+                <h2 class="subheader place-left ntp ntm" style="height:35px">
+                    Report for <span class="subheader" data-bind="text:moment.utc(dateSelected()).local().format('LL')"></span>
+                </h2>
+            </div>
+
+            <div data-bind="resize:{}">
+                <div class="grid fluid ntp nbm">
+                    <div class="row">
+                        <div class="span9">
+                            <div data-bind="template:{ name :'ReportItemsTemplate', data: $data}"></div>
+                        </div>
+                        <div class="span3">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var model = @Html.Raw(JsonConvert.SerializeObject(Model, new JsonSerializerSettings()
+           {
+               ContractResolver = new Dayspent.Web.Application.Configuration.FilteredCamelCasePropertyNamesContractResolver
+               {
+                   AssembliesToInclude =
+                    {
+                        typeof (Startup).Assembly
+                    }
+               }
+           }));
+</script>
+<script id="ReportItemsTemplate" type="text/html">
+    <div class="border padding15 bg-white" style="width:100%">
+        <!-- ko foreach: itemsByCategories -->
+        <h3 class="subheader-secondary" data-bind="text:description">Ongoing</h3>
+        <table class="table border-bottom">
+            <tbody data-bind="foreach:reportItems">
+                <tr>
+                    <td style="width:10%" data-bind="text:reportingUserShortName"></td>
+                    <td style="width:90%" data-bind="markdownToHtml:description"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- /ko -->
+    </div>
+</script>
+

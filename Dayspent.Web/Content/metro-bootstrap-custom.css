@@ -147,6 +147,17 @@ nav.horizontal-menu a.big {
     padding-left:0px;   
 }
 
+.horizontal-menu ul li.active a, .horizontal-menu ul li.active a:hover
+{
+    border:0;
+    border-bottom:#9a1616 solid 2px;
+    /*
+        background-color: #9a1616;
+        color: #ffffff;
+    */
+    
+}
+
 /* menus for section headers */
 .metro nav.horizontal-menu.section-header li > a {
     color: rgba(0, 0, 0, 0.6); 
@@ -372,10 +383,14 @@ ul.ui-autocomplete{
 
 
 /************************************ 
- *  Text styles
+ *  Text styles - font size
  ************************************/
 .text-large{
     font-size:1.3em;
+}
+
+.text-small{
+    font-size:-1.3em;
 }
 
 /************************************ 
@@ -730,4 +745,23 @@ div.grip
     cursor:move;
     position:absolute;
     left:-10px;
+}
+
+/*
+    sidebar
+*/
+
+.metro .sidebar > ul li a {
+    background-color:inherit;
+    border-left-style:solid;
+    border-left-color: transparent!important;
+    border-left-width:5px!important;
+}
+
+
+.metro .sidebar > ul li.active a {
+    background-color:inherit;
+    border-left-style:solid;
+    border-left-color: #9a1616!important;
+    border-left-width:5px!important;  
 }

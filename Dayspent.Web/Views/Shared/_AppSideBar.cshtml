@@ -1,16 +1,15 @@
 ﻿<nav id="AppSidebar" class="sidebar dark" style="overflow-y:auto;overflow-x:hidden">
     <ul>
-        <li data-bind="css: { 'stick bg-red' : selected() == 'dashboard' }"><a href="#/dashboard" >Dashboard</a></li>
-        <li data-bind="css: {'stick bg-red': selected() == 'myreports'}"><a href="#/myreports" >My Reports</a></li>
+        <li data-bind="css: { 'active' : selected() == 'dashboard' }"><a href="#/dashboard" >Dashboard</a></li>
+        <li data-bind="css: { 'active': selected() == 'myreports'}"><a href="#/myreports" >My Reports</a></li>
         
-        <li class="" data-bind="">
+        <li class="" data-bind="css: {'active': selected() == ''}">
             <a href="" class="dropdown-toggle">Groups</a>
             <ul class="dropdown-menu keep-open" data-role="dropdown">
-                <li><a href="">All</a></li>
-                <li><a href="">Development Team</a></li>
-                <li><a href="">Marketing</a></li>
-                <li><a href="">Accounts</a></li>
-                <li><a href="">Help Desk</a></li>
+                <li><a href="#/group">All</a></li>
+                <!-- ko foreach: groups -->
+                <li><a href="" data-bind="text:name, attr: { href:'test' }"></a></li>
+                <!-- /ko -->
                 <li class="divider"></li>
                 <li><a href="">New Group...</a></li>
             </ul>
@@ -28,6 +27,7 @@
                 <li><a href="">New Group...</a></li>
             </ul>
         </li>
+        <li data-bind="css: { 'stick bg-red' : selected() == 'statistics' }"><a href="#/statistics">Projects and Objectives</a></li>
         <li data-bind="css: { 'stick bg-red' : selected() == 'statistics' }"><a href="#/statistics">Search</a></li>
         <li><a href="">Settings</a></li>
 

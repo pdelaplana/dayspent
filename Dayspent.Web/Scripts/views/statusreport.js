@@ -15,12 +15,6 @@
        
         ui.addPart('myReports', new MyReportsViewModel(model)).bindTo('#MyReports');
 
-
-        $(window).resize(function () {
-            $('.page-region').height($(window).height()-50);
-            $('#MyReports .row').height($(window).height()-50);
-
-        })
         $(window).resize();
 
         $('[data-role=dropdown]').dropdown();

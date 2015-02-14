@@ -211,6 +211,8 @@
   <ItemGroup>
     <Compile Include="API\ActivityController.cs" />
     <Compile Include="API\DashboardController.cs" />
+    <Compile Include="API\ReportingGroupController.cs" />
+    <Compile Include="API\StatusReportCategoryController.cs" />
     <Compile Include="API\StatusReportItemTagController.cs" />
     <Compile Include="API\ActivityTagController.cs" />
     <Compile Include="API\AvatarController.cs" />
@@ -222,12 +224,15 @@
     <Compile Include="API\StatusReportItemController.cs" />
     <Compile Include="API\TagController.cs" />
     <Compile Include="API\TimelineController.cs" />
+    <Compile Include="API\TrackableController.cs" />
     <Compile Include="API\WebApiResult.cs" />
     <Compile Include="Application\ApplicationSignInManager.cs" />
     <Compile Include="Application\ApplicationWebContext.cs" />
     <Compile Include="Application\AuthenticatedUser.cs" />
     <Compile Include="Application\Cache\TenantsCache.cs" />
     <Compile Include="Application\Cache\UserCache.cs" />
+    <Compile Include="Application\Configuration\AutoMapper\Profiles\TrackableMappingProfile.cs" />
+    <Compile Include="Application\Configuration\AutoMapper\Profiles\ReportingGroupMappingProfile.cs" />
     <Compile Include="Application\Configuration\AutoMapper\Profiles\StatusReportMappingProfile.cs" />
     <Compile Include="Application\Configuration\AutoMapper\Profiles\TimelineMappingProfile.cs" />
     <Compile Include="Application\Configuration\AutoMapper\Profiles\GeneralMappingProfile.cs" />
@@ -252,6 +257,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StatusReportController.cs" />
     <Compile Include="Controllers\TimelineController.cs" />
@@ -260,6 +266,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DailyUpdateViewModel.cs" />
+    <Compile Include="Models\GroupReportsViewModel.cs" />
+    <Compile Include="Models\ReportingGroupMemberViewModel.cs" />
+    <Compile Include="Models\ReportingGroupViewModel.cs" />
     <Compile Include="Models\StatusReportItemTagViewModel.cs" />
     <Compile Include="Models\ActivityTagViewModel.cs" />
     <Compile Include="Models\ActivityViewModel.cs" />
@@ -272,6 +281,7 @@
     <Compile Include="Models\TagGroupViewModel.cs" />
     <Compile Include="Models\TimelineViewModel.cs" />
     <Compile Include="Models\TimeSpentReportViewModel.cs" />
+    <Compile Include="Models\TrackableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -341,6 +351,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\cache.js" />
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\router.js" />
     <Content Include="Scripts\app\ui.js" />
@@ -455,6 +466,7 @@
     <Content Include="Scripts\rangyinputs-jquery-1.1.2.js" />
     <Content Include="Scripts\rangyinputs-jquery-1.1.2.min.js" />
     <Content Include="Scripts\repositories\activityrepository.js" />
+    <Content Include="Scripts\repositories\reportinggrouprepository.js" />
     <Content Include="Scripts\repositories\statusreportitemtagrepository.js" />
     <Content Include="Scripts\repositories\activitytagrepository.js" />
     <Content Include="Scripts\repositories\statusreportitemrepository.js" />
@@ -473,15 +485,19 @@
     <Content Include="Scripts\viewmodels\createactivityviewmodel.js" />
     <Content Include="Scripts\viewmodels\dailyupdateviewmodel.js" />
     <Content Include="Scripts\viewmodels\dashboardviewmodel.js" />
+    <Content Include="Scripts\viewmodels\groupreportsviewmodel.js" />
     <Content Include="Scripts\viewmodels\myreportsviewmodel.js" />
     <Content Include="Scripts\viewmodels\profileviewmodel.js" />
+    <Content Include="Scripts\viewmodels\reportinggroupviewmodel.js" />
     <Content Include="Scripts\viewmodels\reportviewmodel.js" />
     <Content Include="Scripts\viewmodels\statusreportcategoryviewmodel.js" />
     <Content Include="Scripts\viewmodels\statusreportitemviewmodel.js" />
     <Content Include="Scripts\viewmodels\statusreportviewmodel.js" />
     <Content Include="Scripts\viewmodels\taggroupviewmodel.js" />
+    <Content Include="Scripts\viewmodels\tagsummaryviewmodel.js" />
     <Content Include="Scripts\viewmodels\timelineviewmodel.js" />
     <Content Include="Scripts\viewmodels\usersummaryviewmodel.js" />
+    <Content Include="Scripts\views\group.js" />
     <Content Include="Scripts\views\statistics.js" />
     <Content Include="Scripts\views\dashboard.js" />
     <Content Include="Scripts\views\profile.js" />
@@ -494,6 +510,7 @@
     <Content Include="Scripts\widgets\periodfilters.js" />
     <Content Include="Scripts\widgets\taggroupdialog.js" />
     <Content Include="Scripts\widgets\timelinesidebar.js" />
+    <Content Include="Scripts\widgets\timerdialog.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -567,6 +584,9 @@
     <Content Include="Views\StatusReport\_Index.cshtml" />
     <Content Include="Views\Statistics\_Index.cshtml" />
     <Content Include="Scripts\knockout.bindings.chartjs.js" />
+    <Content Include="Views\Group\_Index.cshtml" />
+    <Content Include="Views\Dashboard\_Overview.cshtml" />
+    <Content Include="Views\Dashboard\_Tags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

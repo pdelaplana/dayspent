@@ -66,7 +66,7 @@ namespace Dayspent.Web.Application.Cache
                 user = (T)this._securityContext.Users.Where(u => u.Id == userId).SingleOrDefault();
                 if (user != null)
                 {
-                    dictionary.Add(user.UserName, user);
+                    dictionary.Add(user.Id, user);
                     return user;
                 }
                 else

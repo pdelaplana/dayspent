@@ -57,8 +57,9 @@ input[type=text]:focus {
     width:230px;
 }
 
+
 .metro .sidebar ul li {
-    border-left:5px solid transparent;
+    border-left:0px solid transparent;
 }
 
 
@@ -143,12 +144,11 @@ div.datepicker .ui-datepicker {
     height:100%;
 }
 
-#MyReports #StatusReportsList.listview{
-    height:92%;
+#MyReports #StatusReportsList.listview, #GroupReportsList.listview{
     overflow:auto
 }
 
-#MyReports #StatusReportsList.listview .list{
+#MyReports #StatusReportsList.listview .list, #GroupReportsList.listview .list{
    min-width:0;
    width:99%;
 }
@@ -256,9 +256,17 @@ textarea.transparent, input[type=text].transparent{
     margin:0;
     padding:0;
     outline:0;
+    /*
     border-bottom: 1px #d9d9d9 solid!important;
+    */
 
-    
+    font-family: "Segoe UI_", "Open Sans", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14.66px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.29px;
+    line-height: 20px;
+
 }
 
 textarea{

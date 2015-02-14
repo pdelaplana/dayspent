@@ -65,6 +65,10 @@
     <Compile Include="Migrations\201411300754297_InitialCreateStatusReports.Designer.cs">
       <DependentUpon>201411300754297_InitialCreateStatusReports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502031941286_AddTrackable.cs" />
+    <Compile Include="Migrations\201502031941286_AddTrackable.Designer.cs">
+      <DependentUpon>201502031941286_AddTrackable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ReportingGroup.cs" />
     <Compile Include="Models\ReportingGroupMember.cs" />
@@ -78,10 +82,12 @@
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ActivityTag.cs" />
     <Compile Include="Models\Timeline.cs" />
+    <Compile Include="Models\Trackable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationRepository.cs" />
     <Compile Include="Repository\CommandResult.cs" />
     <Compile Include="Repository\Commands\ApplicationDBExtensions.cs" />
+    <Compile Include="Repository\Commands\CreateTrackableCommand.cs" />
     <Compile Include="Repository\Commands\CreateStatusReportItemTagCommand.cs" />
     <Compile Include="Repository\Commands\CreateStatusReportItemCommand.cs" />
     <Compile Include="Repository\Commands\CreateActivityTagCommand.cs" />
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411300754297_InitialCreateStatusReports.resx">
       <DependentUpon>201411300754297_InitialCreateStatusReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031941286_AddTrackable.resx">
+      <DependentUpon>201502031941286_AddTrackable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

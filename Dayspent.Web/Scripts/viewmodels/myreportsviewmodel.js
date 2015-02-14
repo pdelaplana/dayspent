@@ -15,6 +15,7 @@
             report.selected(false);
         })
         statusReport.selected(true);
+
     }
     self.sortedStatusReportsByDate = ko.computed(function () {
         return self.statusReports().sort(function (a,b) {

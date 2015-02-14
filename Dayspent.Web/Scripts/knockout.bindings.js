@@ -481,6 +481,11 @@ ko.bindingHandlers.progressbar = {
             value: value,
             color: 'bg-green'
         });
+    },
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = ko.utils.unwrapObservable(valueAccessor()),
+            pb = $(element).progressbar();
+        pb.progressbar('value', value);
     }
 }
 
@@ -502,3 +507,31 @@ ko.bindingHandlers.splitText = {
     }
 }
 
+/**
+ * custom binding handler to resize height of element to window
+ * 
+ */
+ko.bindingHandlers.resize = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        $(element)
+            .css('overflow', 'auto')
+            .css('height', '90%')
+            .height($(window).height() - 100);
+    }
+}
+
+/**
+ * custom binding handler to show a loading image 
+ * 
+ */
+ko.bindingHandlers.loading = {
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor(), allBindings = allBindingsAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+        if (valueUnwrapped == true)
+            $(element).show(); // Make the element visible
+        else
+            $(element).hide();   // Make the element invisible
+    }
+};

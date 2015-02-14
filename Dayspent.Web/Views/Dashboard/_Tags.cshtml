@@ -1,0 +1,73 @@
+﻿<div id="TagSummary" class="grid fluid" data-bind="resize:{}">
+    <div class="push-down-10" style="">
+        <div class="item-title-secondary cursor-pointer" style="height:35px; margin-left:10px" data-bind="">
+            From
+            <text data-bind="text: moment(startDate()).format('LL'), popModalCalendar:startDate, placement:'bottomLeft', noClearButton: true, saveValue: loadData"></text><i class="icon-arrow-down-5 " style="font-size:15px"></i>
+            to
+            <text data-bind="text: moment(endDate()).format('LL'), popModalCalendar:endDate, placement:'bottomLeft', noClearButton: true, saveValue: loadData"></text><i class="icon-arrow-down-5 " style="font-size:15px"></i>
+        </div>
+    </div>
+
+    <div class="row padding20 ntp">
+        <div class="span9">
+            <div class="panel bg-white">
+                <div class="panel-content">
+                    <div data-bind="if:isUpdating">
+                        <div>Updating</div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:30%"><div class="item-title-secondary">Total</div> </th>
+                                <th style="width:60%"><span class="item-title-secondary place-right" data-bind="text: app.utils.formatTime(totalTimeSpentInSecs())"></span></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:persons">
+                            <!--ko if: selected-->
+                            <tr>
+                                <td style="vertical-align:text-top" class="ntp">
+                                    <span data-bind="text:userFullName" class="item-title fg-orange"></span>
+                                </td>
+                                <td>
+                                    <div class="progress-bar large" data-color="bg-orange" data-bind="progressbar: (timeSpentInSecs()/$root.totalTimeSpentInSecs())*100"></div>
+                                    <span class="text-muted place-right" data-bind="text: app.utils.formatTime(timeSpentInSecs())"></span>
+                                </td>
+                            </tr>
+                            <!-- ko foreach: tags -->
+                            <!-- ko if: selected-->
+                            <tr>
+                                <td data-bind="text:tag" style="vertical-align:text-top" class="ntp"></td>
+                                <td>
+                                    <div class="progress-bar" data-bind="progressbar: (timeSpentInSecs()/$root.totalTimeSpentInSecs())*100"></div>
+                                    <span class="text-muted place-right" data-bind="text: app.utils.formatTime(timeSpentInSecs())"></span>
+                                </td>
+                            </tr>
+                            <!--/ko-->
+                            <!--/ko -->
+                            <!--/ko-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="panel bg-white">
+                <div class="panel-header">
+                    Filter
+                </div>
+                <div class="panel-content">
+                    <nav class="vertical-menu compact">
+                        <ul>
+                            <li class="title">Tags</li>
+                            <!-- ko foreach: tagFilters -->
+                            <li><a href="" data-bind="click:$root.toggleFilterSelection"><i data-bind="css:{ 'icon-checkbox': selected(), 'icon-checkbox-unchecked': !selected()  }" class="icon-checkbox"></i>  <text data-bind="text:tag"></text> </a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

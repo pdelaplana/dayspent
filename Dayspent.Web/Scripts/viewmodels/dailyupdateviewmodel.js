@@ -1,5 +1,6 @@
 ﻿function DailyUpdateViewModel(data) {
     var self = this;
+    self.ready = ko.observable(false);
     self.reportDate = ko.observable(moment().startOf('day'));
     self.userSummaries = ko.observableArray();
 
@@ -89,7 +90,7 @@
     //
     self.changeDate = function () {
         $.ajax({
-            url: '/api/dashboard/summaries/',
+            url: '/api/dashboard/overview/',
             type: 'post',
             dataType: 'json',
             data:{ 

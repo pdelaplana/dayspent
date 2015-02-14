@@ -45,11 +45,25 @@ namespace Dayspent.Web.API
             // submit status report
             this._repository.ExecuteCommand(command);
 
-            // and create new status report
+            // create new status report
             var result = this._repository.ExecuteCommand(new CreateStatusReportCommand{
                 ReportDate = DateTime.UtcNow.Date,
                 ReportingUserId = User.Identity.GetUserId()
             });
+
+            // move ongoing and upcoming items from old to new report
+            var items = this._repository.StatusReportItems.Where(i => i.StatusReportId == command.StatusReportId && (i.StatusReportCategory.Code == StatusReportCategoryCodes.InProgess || i.StatusReportCategory.Code == StatusReportCategoryCodes.NotStarted)).ToList();
+            foreach (var item in items)
+            {
+                this._repository.ExecuteCommand(new CreateStatusReportItemCommand
+                {
+                    StatusReportId = result.Data.StatusReportId,
+                    StatusReportCategoryId = item.StatusReportCategoryId,
+                    Description = item.Description
+                });
+            }
+ 
+
             return AutoMapper.Mapper.Map<CommandResult<StatusReport>, WebApiResult<StatusReportViewModel>>(result);
         }
 

@@ -20,6 +20,12 @@ namespace Dayspent.Web.API
         public DateTime ReportDate { get; set; }
     }
 
+    public class TagSummaryParam
+    {
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+    }
+
     [RoutePrefix("api/dashboard")]
     [Authorize]
     public class DashboardController : ApiController
@@ -33,9 +39,9 @@ namespace Dayspent.Web.API
             _userCache = userCache;
         }
 
-        [Route("summaries")]
+        [Route("overview")]
         [HttpPost]
-        public IList<UserSummaryViewModel> UserSummaries([FromBody] UserSummaryParam param) 
+        public IList<UserSummaryViewModel> Overview([FromBody] UserSummaryParam param) 
         {
             //ApplicationUser user;
             // get user
@@ -76,6 +82,13 @@ namespace Dayspent.Web.API
             return summaries;
         }
 
+        [Route("tagsummary")]
+        [HttpPost]
+        public IList<StatusReportItemViewModel> TagSummary([FromBody] TagSummaryParam param)
+        {
+            var result = _repository.StatusReportItems.Where(i => i.StatusReport.ReportDate <= param.EndDate && i.StatusReport.ReportDate >= param.StartDate).ToList();
+            return AutoMapper.Mapper.Map<IList<StatusReportItem>, IList<StatusReportItemViewModel>>(result);
+        }
 
     }
 }

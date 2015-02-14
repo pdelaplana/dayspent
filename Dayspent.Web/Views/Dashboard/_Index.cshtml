@@ -1,95 +1,18 @@
 ﻿@model Dayspent.Web.Models.DailyUpdateViewModel
 
 <div id="Dashboard">
-    <div class="push-down-20" style="">
-        <h2 class="subheader cursor-pointer" style="height:35px; margin-left:10px" data-bind="">
-            Daily Update:
-            <text data-bind="text: moment(reportDate()).format('LL'), popModalCalendar:reportDate, placement:'bottomLeft', noClearButton: true, saveValue: changeDate"></text>  <i class="icon-arrow-down-5 " style="font-size:22px"></i>
-        </h2>
-
+    <div class="" style="">
+        <nav class="horizontal-menu" id="DashboardMenu">
+            <ul>
+                <li data-bind="css: { 'active':selected()=='overview'  }"><a href="#/dashboard/overview">Overview</a></li>
+                <li><a href="#">Projects</a></li>
+                <li data-bind="css: { 'active':selected()=='tags'  }"><a href="#/dashboard/tags">Time Spent</a></li>
+            </ul>
+        </nav>
     </div>
-    
-    <div class="grid fluid" style="overflow:auto;height:90%">
-        <div class="row padding20 ">
-            <div class="span2 text-center padding10">
-                <canvas class="" width="150" height="150" data-bind="doughnutChart:dataForInProgressChart, displayText:totals.inProgressWork() "></canvas>
-                <div class="text-center fg-grayLight block">In Progress</div>
-            </div>
-            <div class="span2 text-center padding10">
-                <canvas class="" width="150" height="150" data-bind="doughnutChart:dataForCompletedChart, displayText:totals.completedWork() "></canvas>
-                <div class="text-center fg-grayLight block">Completed</div>
-            </div>
-            <div class="span2 text-center padding10" >
-                <canvas class="" width="150" height="150" data-bind="doughnutChart:dataForNotStartedChart, displayText:totals.notStartedWork() "></canvas>
-                <div class="text-center fg-grayLight block">Not Started</div>
-            </div>
-            <div class="span2 text-center padding10">
-                <canvas class="" width="150" height="150" data-bind="doughnutChart:dataForImpedimentsChart, displayText:totals.impediments() "></canvas>
-                <div class="text-center fg-grayLight block">Challenges &amp; Obstacles</div>
-            </div>
-            <div class="span2 text-center padding10">
-                <canvas class="" width="150" height="150" data-bind="doughnutChart:dataForProblemsChart, displayText:'0'"></canvas>
-                <div class="text-center fg-grayLight block">Problems</div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="span10 padding20">
-                <div class="panel bg-white">
-                    <div class="panel-content">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="width:30%" class="border-bottom"></th>
-                                    <th style="width:30%" class=""><span class="item-title-secondary"><i class="icon-newspaper"></i> Summary</span> </th>
-                                    <th style="width:30%" class=""><span class="item-title-secondary"><i class="icon-clock"></i> Time Spent</span> </th>
-                                    <th style="width:10%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- ko foreach: userSummaries -->
-                                <tr style="vertical-align:bottom">
-                                    <td>
-                                        <img src="/api/avatar/patrick?height=25" data-bind="attr: { src: '/api/avatar/'+userId()+'?height=25' }" />
-                                        <span class="subheader-secondary" style="font-size:14pt;vertical-align:middle" data-bind="text: userFullName"></span>
-                                    </td>
-                                    <!-- ko if: noSubmission() -->
-                                    <td colspan="2">
-                                        <span class="label bg-red fg-white">No report submitted.</span>
-                                        
-                                    </td>
-                                    <!-- /ko -->
-                                    <!-- ko ifnot: noSubmission() -->
-                                    <td class="text-center">
-                                        <div class="tile quarter" title="In Progress"><div class="tile-content bg-green fg-white"><div class="text-center" data-bind="text: inProgressWork">3</div></div></div>
-                                        <div class="tile quarter" title="Completed"><div class="tile-content bg-blue fg-white"><div class="text-center" data-bind="text: completedWork">1</div></div></div>
-                                        <div class="tile quarter" title="Not Started"><div class="tile-content"><div class="text-center bg-gray fg-white" data-bind="text: notStartedWork">5</div></div></div>
-                                        <div class="tile quarter" title="Challenges & Obstacles"><div class="tile-content"><div class="text-center bg-yellow fg-white" data-bind="text: impediments">0</div></div></div>
-                                        <div class="tile quarter" title="Problems"><div class="tile-content"><div class="text-center bg-red fg-white">0</div></div></div>
-                                    </td>
-                                    <td class="text-center" style="vertical-align:middle">
-                                        <div class="progress-bar" data-bind="progressbar: timeSpent"></div>
-                                        <span class="box" data-bind="text: app.utils.formatTime(timeSpentInSecs()/60)"></span>
-                                    </td>
-                                    <!-- /ko -->
-                                    <td>
-                                        
-                                    </td>
-                                </tr>
-                                <!--/ko-->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="span3 padding20 ">
-
-                </div>
-            </div>
-        </div>
+   
+    <div class="content-area"  >
+        @Html.Partial("_overview")
     </div>
 
 

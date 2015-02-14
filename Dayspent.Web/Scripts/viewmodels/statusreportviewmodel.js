@@ -24,6 +24,7 @@ function StatusReportViewModel(data) {
 
     self.reportItems = ko.observableArray([]);
 
+    
     //
     // state 
     //
@@ -59,8 +60,8 @@ function StatusReportViewModel(data) {
     })
 
     self.tagGroups = ko.computed(function () {
-        self.reportItems();
-        var result = new Array,
+        var array = self.reportItems();
+        var result = new Array(),
             tagGroups = ko.utils.arrayGetDistinctValues(self.reportItems.getArrayOfProperty('tagGroup')).sort();
         $.each(tagGroups, function (i, tagGroup) {
             var items = ko.utils.arrayFilter(self.reportItems(), function (item) {
@@ -73,6 +74,11 @@ function StatusReportViewModel(data) {
             result.push(new TagGroup(tagGroup, totalTime));
         })
         return result;
+    }, self)
+
+    self.totalTimeSpentInSecs = ko.computed(function () {
+
+        return self.reportItems.sum('timeSpentInSecs');
     })
 
     //
@@ -172,11 +178,11 @@ function StatusReportViewModel(data) {
     $.each(app.reportCategories(), function (i, category) {
 
         var itemsGroup = new ItemsGroup();
+        itemsGroup.parent = self;
         itemsGroup.statusReportId(self.statusReportId());
         itemsGroup.statusReportCategoryId(category.statusReportCategoryId());
         itemsGroup.code(category.code());
         itemsGroup.description(category.description());
-
         var itemsArray = ko.utils.arrayFilter(self.reportItems(), function (reportItem) {
             return reportItem.statusReportCategoryId() == category.statusReportCategoryId()
         })
@@ -193,6 +199,7 @@ function StatusReportViewModel(data) {
 
 function ItemsGroup() {
     var self = this;
+    self.parent = null;
     self.statusReportId = ko.observable();
     self.statusReportCategoryId = ko.observable();
     self.code = ko.observable();
@@ -202,6 +209,7 @@ function ItemsGroup() {
         if (confirm('Please confirm that you wish to delete this entry?')) {
             item.remove().success(function (result) {
                 self.reportItems.remove(item);
+                self.parent.reportItems.remove(item);
                 app.ui.notify('Status report entry has been deleted.');
             })
         }
@@ -210,6 +218,6 @@ function ItemsGroup() {
 
 function TagGroup(name, totalTimeInSecs) {
     var self = this;
-    self.name = name;
-    self.totalTimeInSecs = totalTimeInSecs;
+    self.name = ko.observable(name);
+    self.totalTimeInSecs = ko.observable(totalTimeInSecs);
 }

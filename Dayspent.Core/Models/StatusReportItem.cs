@@ -30,7 +30,9 @@ namespace Dayspent.Core.Models
 
         public bool HasRedFlag { get; set; }
 
-      
+        public int? TrackableId { get; set; }
+        [ForeignKey("TrackableId")]
+        public virtual Trackable Trackable { get; set; }
 
         public virtual ICollection<StatusReportItemTag> Tags { get; set; }
 

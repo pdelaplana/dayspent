@@ -1,8 +1,8 @@
 ﻿@model Dayspent.Web.Models.MyReportsViewModel
 
-<div id="MyReports" class="grid fluid" style="margin-bottom:0">
-    <div class="row">
-        <div class="span3 border-right" style="" >
+<div id="MyReports" class="" style="margin-bottom:0">
+    <div class="">
+        <div class="place-left border-right pos-abs" style="width:200px" >
             <div class="border-bottom">
                 <nav class="horizontal-menu">
                     <ul>
@@ -21,30 +21,35 @@
                     </ul>
                 </nav>
             </div>
-            <div id="StatusReportsList" class="listview padding10" data-bind="foreach: sortedStatusReportsByDate">
-                <a href="" class="list bg-orange" data-bind="css: { 'selected' : selected() }, click: $parent.selectStatusReport">
-                    <div class="list-content">
-                        <div class="fg-white">
-                            <div class="list-title" data-bind="text:moment.utc(reportDate()).local().format('MMMM') +', '+moment.utc(reportDate()).local().format('YYYY')"></div>
-                            <div class="fg-white" style="font-size:22pt" data-bind="text:moment.utc(reportDate()).local().format('D')"></div>
-                            <div class="list-remark" data-bind="text:moment.utc(reportDate()).local().format('dddd')"></div>
+            <div class="no-padding no-margin" data-bind="resize:{}">
+                <div id="StatusReportsList" class="listview padding10" data-bind="foreach: sortedStatusReportsByDate">
+                    <a href="" class="list bg-white border pos-rel " data-bind="css: { 'selected' : selected() }, click: $parent.selectStatusReport">
+                        <div class="list-content">
+                            <div class="fg-dark pos-rel place-left">
+                                <div class="list-title" data-bind="text:moment.utc(reportDate()).local().format('MMMM') +', '+moment.utc(reportDate()).local().format('YYYY')"></div>
+                                <div class="fg-dark" style="font-size:22pt" data-bind="text:moment.utc(reportDate()).local().format('D')"></div>
+                                <div class="list-title" data-bind="text:moment.utc(reportDate()).local().format('dddd')"></div>
+                            </div>
+                            <!-- ko ifnot: submitted-->
+                            <i class="icon-pencil place-bottom-right padding10"></i>
+                            <!-- /ko -->
                         </div>
-                    </div>
-                </a>
-            </div>        
+                    </a>
+                </div>
+            </div>
+               
         </div>
-        <div id="SelectedStatusReport" class="span9 no-padding" >
-            <div class="push-down-20" data-bind="with: statusReports.selected" style="height:100%">
+        <div id="SelectedStatusReport" class="place-left no-padding no-margin" style="width:100%;padding-left:220px!important;height:100%" >
+            <div class="push-down-20 nbp ntp"  data-bind="with: statusReports.selected" >
                 <div class="pos-rel block clearfix">
                     <h2 class="subheader place-left ntp ntm" style="height:35px">
                         Report for <span class="subheader" data-bind="text:moment.utc(reportDate()).local().format('LL')"></span>
                         <a href="" style="font-size:x-small" data-bind="popModalCalendar:reportDate, placement:'bottomRight', noClearButton: true, saveValue: save, visible:true">Change</a>
-                    </h2>
-                    
+                    </h2>    
                 </div>
 
-                <div style="overflow:auto;height:90%" class="">
-                    <div class="grid fluid">
+                <div data-bind="resize:{}">
+                    <div class="grid fluid ntp nbm">
                         <div class="row">
                             <div class="span9">
                                 <div data-bind="template:{ name :'ReportItemsTemplate', data: $data}"></div>
@@ -53,10 +58,7 @@
                                 <div data-bind="template:{ name :'ReportChartTemplate', data: $data}"></div>
                             </div>
                         </div>
-
                     </div>
-
-                    
                 </div>
 
             </div>        
@@ -76,25 +78,7 @@
            }));
 </script>
 
-<script id="AddStatusReportItemTemplate" type="text/html">
-    <div class="AddStatusReportItemTemplate">
-        <div data-role="label" class=" fg-grayLight bd-grayLighter cursor-pointer">
-            <i class="icon-plus-2"></i>
-            Click here to add <span data-bind="text:category"></span>
-        </div>
-        <div data-role="form">
-            <div class="input-control textarea">
-                <textarea data-bind="val: description"></textarea>
-            </div>
-            <div class="tags-container" style="width:100%;display:inline-block" data-bind="">
-                <ul class="tagit transparent" data-bind="tagit: tags, tagitOptions: { enabled: true, initialTags: tags(), sourceUrl: '/api/tags' }"></ul>
-            </div>
-            <button class="button primary" data-bind="click:save">Save</button>
-            <button class="button link" data-bind="click:cancel">Cancel</button>
-        </div>
-    </div>
-    
-</script>
+
 
 <script id="ReportItemsTemplate" type="text/html">
     <div data-bind="foreach: reportCategories" class="border padding15 bg-white" style="width:100%">
@@ -102,31 +86,38 @@
         <div class="listview small">
             <div data-bind="sortable: { data: reportItems, connectClass:'target', allowDrop:true, afterMove: $parent.repositionItems, isEnabled:true, options:{ placeholder: ItemPlaceHolder, handle: '.grip' } }" style="min-height:5px">
                 <div class="list ol-transparent no-border no-padding bg-white">
-                    <div class="list-content border-bottom" style="cursor:default" data-bind="hover:{}">
+                    <div class="list-content border-bottom content-area" style="cursor:default" data-bind="hover:{}">
+                        
                         <div style="padding-left:0px">
                             <div class="button-dropdown place-right">
                                 <i class="icon-arrow-down-5 cursor-pointer text-muted no-arrow dropdown-toggle "></i>
                                 <ul class="dropdown-menu place-right" data-role="dropdown" style="display:none" data-bind="dropdown:null">
-                                    <li><a href="#">Start Timer</a></li>
-                                    <li><a href="#">Add 30 minutes</a></li>
+                                    <li><a href="#" data-bind="modalTimer:timeSpentInSecs">Start Timer</a></li>
+                                    <li><a href="#" data-bind="click:incrementTimeSpent" data-param="15">Add 15 minutes</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="" data-bind="editStatusReportItem: {}, tagitOptions: { initialTags: tags(), sourceUrl: '/api/tags', addTag: addTag, removeTag: removeTag }">Edit</a></li>
+                                    <li><a href="#" data-bind="click: $parent.removeItem">Delete</a></li>
                                 </ul>
                             </div> 
-                            <div data-bind="markdownToHtml:description"></div>
-                            @*
-                                <div class="tags-container clearfix" style="width:100%" data-bind="visible:tags().length > 0">
-                                    <ul class="tagit transparent" data-bind="tagit: tags, tagitOptions: { enabled: false, initialTags: tags(), sourceUrl: '/api/tags',addTag: addTag, removeTag: removeTag }"></ul>
-                                </div>
-                            *@
+                            
+                            <div class="hide item-title bg-orange fg-white label">OW-12: General Support <i class="icon-cancel"></i> </div>
+                            <div class="push-down-10" data-bind="markdownToHtml:description"></div>                            
+                            
                             <div class="item-links">
+                                @*
                                 <a href="" class="text-muted" data-bind="editStatusReportItem: {}, tagitOptions: { initialTags: tags(), sourceUrl: '/api/tags', addTag: addTag, removeTag: removeTag }">edit</a>
                                 <a href="" class="text-muted" data-bind="click: $parent.removeItem">delete</a>
-                                <a href="" class="text-muted">share feedback</a>
+                                *@
+                                <a href="" class="text-muted" data-bind="linkToProject:null">link: project or objective <i class="icon-arrow-down-5"></i> </a>
+                                
+
+                                <a href="" class="text-muted">comments <text class="label">2</text><i class="icon-arrow-down-5"></i></a>
+                                <!-- ko ifnot: $parent.code() == 'UPCOMING' -->
                                 <div class="place-right">
                                     <span class="cursor-pointer text-muted" data-bind="addTime:timeSpentFormatted, css:{ 'label bg-steel fg=white' : timeSpentInSecs == 0   }"></span>
                                 </div>
-                            </div>
+                                <!-- /ko -->
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -157,7 +148,7 @@
     </div>
     <div class=" push-down-30">
         <button class="large bg-green fg-white" data-bind="click:submit,visible:!submitted()">Submit</button>
-        <button class="large bg-red fg-white" data-bind="click:remove">Delete</button>
+        <button class="large bg-red fg-white" data-bind="click:remove, visible:submitted">Delete</button>
     </div>
     <div class="push-down-40"></div>
 
@@ -167,7 +158,7 @@
     <div data-bind="" class="bg-white padding15 border" style="width:90%">
         <h2 class="subheader-secondary">Time Spent</h2>
         <div class="block pos-rel text-center">
-            <canvas class="pos-rel inline-block" width="120" height="120" data-bind="doughnutChart:chartData(), displayText:app.utils.formatTime(reportItems.sum('timeSpentInSecs') / 60)"></canvas>
+            <canvas class="pos-rel inline-block" width="120" height="120" data-bind="doughnutChart:chartData(), displayText:app.utils.formatTime(totalTimeSpentInSecs())"></canvas>
         </div>
         <div>
             <span class="push-down-40 block border-bottom text-muted">Time Spent by Tags</span>
@@ -176,8 +167,8 @@
                     <tr>
                         <td>
                             <div data-bind="splitText:name"></div>
-                            <div class="progress-bar push-down-10" data-bind="progressbar:(totalTimeInSecs/(8*3600))*100"></div>
-                            <span data-bind="text:app.utils.formatTime(totalTimeInSecs/60)"></span>
+                            <div class="progress-bar push-down-10" data-bind="progressbar:(totalTimeInSecs()/(8*3600))*100"></div>
+                            <span class="place-right text-muted" style="font-size:12px" data-bind="text:app.utils.formatTime(totalTimeInSecs())"></span>
                         </td>
 
                     </tr>
@@ -187,3 +178,21 @@
     </div>
 </script>
 
+<script id="Timer" type="text/html"  >
+    <div class="message-dialog bg-white" style="height:40%">
+        <div class="padding20">
+            <i class="icon-cancel-2 fg-grayLighter fg-hover-grayLight place-top-right padding10 cursor-pointer" data-bind="click:close"></i>
+            <small class="fg-grayLight padding5 place-bottom-left" >Started on <text data-bind="text:startDateTime"></text></small>
+            <div style="vertical-align:middle;margin-top:4%">
+                <h1 class="push-down-15 fg-darker" data-bind="text: timeSpent">1h 20 mins</h1>
+                <div class="push-down-40 place">
+                    <input class="button large bg-green fg-white" type="button" value="Start" data-bind="click: timer.start, disable: timer.enabled" />
+                    <input class="button large bg-red fg-white" type="button" value="Stop" data-bind="click: timer.stop, enable: timer.enabled" />
+                    <input class="button large bg-grayDark fg-white" type="button" value="Reset" data-bind="click: timer.reset, disable: timer.enabled" />
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</script> 

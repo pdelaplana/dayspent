@@ -32,6 +32,8 @@
     
         views: views,
 
+        cache: new Cache(),
+
         start: function (path) {
 
             router.run(path);
